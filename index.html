@@ -18,19 +18,18 @@
 <body>
 
   <header>
-  <nav class="menu">
-    <ul>
-      <li><a href="index.html">🏠 Accueil</a></li>
-      <li><a href="livre.html">📖 Livre</a></li>
-      <li><a href="about.html">📜 À propos</a></li>
-      <li><a href="contact.html">✉️ Contact</a></li>
-    </ul>
-  </nav>
-</header>
-
+    <nav class="menu">
+      <ul>
+        <li><a href="index.html">🏠 Accueil</a></li>
+        <li><a href="livre.html">📖 Livre</a></li>
+        <li><a href="about.html">📜 À propos</a></li>
+        <li><a href="contact.html">✉️ Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
   <div class="banner-container">
-    <img src="courlwanga.jpg" alt="Bannière ISC 25 ans" class="banner">
+    <img src="assets/images/courlwanga.jpg" alt="Bannière ISC 25 ans" class="banner">
     <div class="banner-text">
       <h2>🎉 25 ans de lumière</h2>
       <p>Un héritage d’excellence, de foi et de fraternité</p>
@@ -86,8 +85,6 @@
     </form>
   </section>
 
-  <div id="livre"></div>
-
   <footer>© 2025 Institut Saint Charles Lwanga — conçu avec ❤️ par Gabby Umba</footer>
 
   <script>
@@ -104,8 +101,6 @@
     const db = firebase.firestore();
 
     const form = document.getElementById('temoignageForm');
-    const livre = document.getElementById('livre');
-
     const debutSelect = document.getElementById('debut');
     const finSelect = document.getElementById('fin');
 
@@ -145,29 +140,6 @@
       });
 
       form.reset();
-    });
-
-    function shareWhatsApp(message) {
-      const encoded = encodeURIComponent(`Message pour ISC Lwanga :\n\n${message}`);
-      window.open(`https://wa.me/?text=${encoded}`, '_blank');
-    }
-
-    db.collection("temoignages").orderBy("timestamp", "desc").onSnapshot(snapshot => {
-      livre.innerHTML = "";
-      snapshot.forEach(doc => {
-        const data = doc.data();
-        const div = document.createElement('div');
-        div.className = 'temoignage';
-        div.innerHTML = `
-          <strong>${data.nom || "Anonyme"}</strong> — ${data.role || "Rôle inconnu"} (${data.periode || "Période inconnue"})<br>
-          <p>${data.message}</p>
-          <button class="whatsapp-button" onclick="shareWhatsApp('${data.message.replace(/'/g, "\\'")}')">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-            Partager sur WhatsApp
-          </button>
-        `;
-        livre.appendChild(div);
-      });
     });
   </script>
 </body>
