@@ -43,28 +43,53 @@
     <input type="text" id="nom" placeholder="Ton nom complet" required />
 
     <section class="form-section">
-  <h1>📖 Témoignages pour les 25 ans de l’Institut Saint Charles Lwanga</h1>
-  <p class="intro">Partage ton souvenir, ta gratitude ou ton message d’encouragement. Chaque mot est une lumière.</p>
+  <div class="intro-box">
+    <h1>📖 Témoignages pour les 25 ans de l’Institut Saint Charles Lwanga</h1>
+    <p class="subtitle">Chaque mot est une lumière. Chaque souvenir est une bénédiction.</p>
+    <p class="description">Partage ton gratitude, ton souvenir ou ton message d’encouragement. Ce livre est le reflet de notre histoire commune.</p>
+  </div>
 
   <form id="temoignageForm">
     <div class="form-group">
-      <label for="nom">Ton nom complet</label>
+      <label for="nom">🖋️ Ton nom complet</label>
       <input type="text" id="nom" required />
     </div>
 
     <div class="form-group">
-      <label for="role">Tu es...</label>
+      <label for="role">🎭 Tu es...</label>
       <select id="role" required>
         <option value="">Choisir un rôle</option>
-        <option value="Élève">🎓 Élève Actuel(le)</option>
-        <option value="Élève">🎓 Élève Ancien(ne)</option>
-        <option value="Enseignant">👨‍🏫 Enseignant(e) en fonction</option>
-        <option value="Élève">Enseignant(e) ancien(ne)</option>
-        <option value="Directeur">🎖️ Directeurs (Tous)</option>
-        <option value="Préfet">📘 Préfet (Tous)</option>
-        <option value="Ami de l’école">🤝 Partenaires, Amis de l’école</option>
+        <option value="Élève">🎓 Élève</option>
+        <option value="Enseignant">👨‍🏫 Enseignant</option>
+        <option value="Directeur">🎖️ Directeur</option>
+        <option value="Préfet">📘 Préfet</option>
+        <option value="Ami de l’école">🤝 Ami de l’école</option>
       </select>
     </div>
+
+    <div class="form-group double">
+      <div>
+        <label for="debut">📅 Début</label>
+        <select id="debut" required>
+          <option value="">Année</option>
+        </select>
+      </div>
+      <div>
+        <label for="fin">📅 Fin</label>
+        <select id="fin" required>
+          <option value="">Année</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="message">💬 Ton témoignage, souvenir ou bénédiction</label>
+      <textarea id="message" rows="4" required></textarea>
+    </div>
+
+    <button type="submit">✨ Ajouter au livre</button>
+  </form>
+</section>
 
     <div class="form-group double">
       <div>
