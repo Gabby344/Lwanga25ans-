@@ -455,3 +455,48 @@ button[type="submit"]:hover {
     text-align: center;
   }
 }
+body {
+  background-color: #fffaf0;
+  font-family: 'Open Sans', sans-serif;
+  color: #6b4c3b;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2 {
+  color: #d94f70;
+  font-family: 'Playfair Display', serif;
+}
+
+.subtitle {
+  color: #a03c6f;
+}
+
+.menu li a {
+  color: #d94f70;
+}
+
+.menu li a:hover {
+  color: #a03c6f;
+  border-bottom: 2px solid #d94f70;
+}
+
+.form-section {
+  background: linear-gradient(to bottom, #fffaf0, #fef6e4);
+  box-shadow: 0 6px 18px rgba(107, 76, 59, 0.1);
+}
+
+input, select, textarea {
+  border: 1px solid #b8a9a1;
+  background-color: #fff;
+  color: #6b4c3b;
+}
+
+button[type="submit"] {
+  background-color: #d94f70;
+  color: white;
+}
+
+button[type="submit"]:hover {
+  background-color: #a03c6f;
+}
