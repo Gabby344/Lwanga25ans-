@@ -1,84 +1,53 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <link rel="stylesheet" href="assets/css/style.css" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Livre des témoignages — Institut Saint Charle Lwanga</title>
+  <title>Livre des témoignages — ISC Lwanga</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet" />
+
+  <!-- Feuille de style -->
+  <link rel="stylesheet" href="assets/css/style.css" />
 
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore-compat.js"></script>
-
-  <style>
-    body {
-      <nav class="menu">
-  <a href="index.html">Accueil</a>
-  <a href="livre.html">Livre</a>
-  <a href="about.html">À propos</a>
-  <a href="contact.html">Contact</a>
-</nav>
-
-      font-family: 'Georgia', serif;
-      background-color: #fff;
-      color: #333;
-      padding: 40px;
-      max-width: 800px;
-      margin: auto;
-    }
-
-    h1 {
-      text-align: center;
-      color: #d94f70;
-      margin-bottom: 10px;
-    }
-
-    .intro {
-      text-align: center;
-      font-style: italic;
-      margin-bottom: 30px;
-      font-size: 1.1em;
-    }
-
-    .temoignage {
-      border-bottom: 1px solid #ccc;
-      padding: 20px 0;
-      page-break-inside: avoid;
-    }
-
-    .temoignage strong {
-      color: #a03c6f;
-    }
-
-    button {
-      display: block;
-      margin: 30px auto;
-      padding: 10px 20px;
-      font-size: 1em;
-      background-color: #d94f70;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #c03b5f;
-    }
-
-    @media print {
-      button { display: none; }
-    }
-  </style>
 </head>
 <body>
 
-  <h1>Livre des témoignages</h1>
-  <div class="intro">“Chaque mot est une lumière dans le cœur de notre école.”</div>
+  <header>
+    <nav class="menu">
+      <ul>
+        <li><a href="index.html">🏠 Accueil</a></li>
+        <li><a href="livre.html">📖 Livre</a></li>
+        <li><a href="about.html">📜 À propos</a></li>
+        <li><a href="contact.html">✉️ Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <div id="livre"></div>
+  <!-- Bannière d’entrée -->
+  <div class="banner-container">
+    <img src="courlwanga.jpg" alt="Photo de l’école" class="banner">
+    <div class="banner-text">
+      <h2>📖 Livre des témoignages</h2>
+      <p>Merci à tous ceux qui ont partagé leur lumière</p>
+    </div>
+  </div>
 
-  <button onclick="window.print()">🖨️ Imprimer ce livre</button>
+  <!-- Section des témoignages -->
+  <section class="form-section">
+    <div class="intro-box">
+      <p class="subtitle">Chaque mot est une bénédiction. Chaque souvenir est une pierre vivante.</p>
+      <p class="description">Voici les témoignages partagés par la communauté pour célébrer les 25 ans de l’Institut Saint Charles Lwanga.</p>
+    </div>
+
+    <div id="livre"></div>
+  </section>
+
+  <footer>© 2025 Institut Saint Charles Lwanga — conçu avec ❤️ par Gabby Umba</footer>
 
   <script>
     const firebaseConfig = {
@@ -94,34 +63,31 @@
     const db = firebase.firestore();
     const livre = document.getElementById('livre');
 
-    db.collection("temoignages").orderBy("timestamp", "asc").get().then(snapshot => {
+    db.collection("temoignages").orderBy("timestamp", "desc").onSnapshot(snapshot => {
+      livre.innerHTML = "";
       snapshot.forEach(doc => {
         const data = doc.data();
-        const nom = data.nom || "Anonyme";
-        const role = data.role || "Rôle inconnu";
-        const annee = data.annee || "Année inconnue";
-        const message = data.message || "(Message vide)";
-        const date = data.timestamp
-          ? new Date(data.timestamp).toLocaleDateString('fr-FR', {
-              day: 'numeric',
-              month: 'long',
-              year: 'numeric'
-            })
-          : "Date inconnue";
-
         const div = document.createElement('div');
-        div.className = 'temoignage';
+        div.className = 'temoignage-card';
         div.innerHTML = `
-          <strong>${nom}</strong> — ${role} (${annee})<br>
-          <em>${date}</em>
-          <p>${message}</p>
+          <div class="temoignage-header">
+            <strong>${data.nom || "Anonyme"}</strong> — ${data.role || "Rôle inconnu"}<br>
+            <span class="periode">${data.periode || "Période inconnue"}</span>
+          </div>
+          <p class="temoignage-message">"${data.message}"</p>
+          <button class="whatsapp-button" onclick="shareWhatsApp('${data.message.replace(/'/g, "\\'")}')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+            Partager sur WhatsApp
+          </button>
         `;
         livre.appendChild(div);
       });
-    }).catch(error => {
-      livre.innerHTML = "<p>Impossible de charger les témoignages.</p>";
-      console.error(error);
     });
+
+    function shareWhatsApp(message) {
+      const encoded = encodeURIComponent(`Message pour ISC Lwanga :\n\n${message}`);
+      window.open(`https://wa.me/?text=${encoded}`, '_blank');
+    }
   </script>
 </body>
 </html>
