@@ -1,19 +1,12 @@
-/*
- * Feuille de style CSS complète
- * Thème : Bleu Ciel (Couleur de l'école)
- * Optimisé pour le mobile (gestion du menu hamburger)
- */
-
 /* ============================= */
 /* STYLE GÉNÉRAL ET TYPOGRAPHIE  */
 /* ============================= */
 
 body {
   font-family: 'Open Sans', sans-serif;
-  /* Fond Bleu Ciel très clair */
   background-color: #E6F2FF;
   color: #333;
-  padding: 20px;
+  padding: 0;
   margin: 0;
   animation: fadeIn 1.5s ease-in forwards;
 }
@@ -23,21 +16,17 @@ body {
   to { opacity: 1; }
 }
 
-/* Titres H1 et H2 */
 h1, h2 {
-  /* Bleu Primaire (de l'école) par défaut */
   color: #007ACC;
   font-family: 'Playfair Display', serif;
 }
 
-/* Sous-titres (Description du formulaire, etc.) */
 .subtitle {
-  /* Bleu Secondaire */
   color: #006BB3;
 }
 
 /* ============================= */
-/* MENU DE NAVIGATION (DESKTOP & MOBILE) */
+/* MENU DE NAVIGATION            */
 /* ============================= */
 
 .navbar {
@@ -52,23 +41,35 @@ h1, h2 {
   z-index: 1000;
 }
 
-/* Logo (Texte "Institut Saint Charles Lwanga" en haut à gauche) */
 .logo {
   font-family: 'Playfair Display', serif;
   font-size: 1.3em;
-  color: #007ACC; /* Bleu Primaire de l'école */
+  color: #007ACC;
   font-weight: bold;
 }
 
-/* Icône Hamburger (Menu Mobile) */
 .hamburger {
   font-size: 1.8em;
   cursor: pointer;
-  color: #007ACC !important; /* Force la couleur bleue pour l'icône */
-  display: none; /* Caché par défaut, affiché par media query */
+  color: #007ACC;
+  display: none;
 }
 
-/* Liste des liens de navigation (Desktop) */
+.menu {
+  display: none;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  background-color: #E6F2FF;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  z-index: 9999;
+}
+
+.menu.show {
+  display: block;
+}
+
 .menu ul {
   display: flex;
   justify-content: center;
@@ -78,9 +79,16 @@ h1, h2 {
   padding: 0;
 }
 
+.menu.show ul {
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  text-align: center;
+}
+
 .menu li a {
   text-decoration: none;
-  color: #007ACC; /* Bleu Primaire */
+  color: #007ACC;
   font-weight: 600;
   font-size: 1.05em;
   font-family: 'Open Sans', sans-serif;
@@ -90,55 +98,33 @@ h1, h2 {
 }
 
 .menu li a:hover {
-  color: #006BB3; /* Bleu Secondaire (survol) */
+  color: #006BB3;
   border-bottom: 2px solid #007ACC;
 }
 
-/* ============================= */
-/* RÉPONSE ADAPTATIVE (@MEDIA)   */
-/* ============================= */
-
-/* Mobile (Portait et Paysage) - Écrans <= 600px */
 @media (max-width: 600px) {
-  /* Afficher l'icône hamburger */
   .hamburger {
-    display: block !important;
+    display: block;
   }
-  
-  /* Cacher le menu de bureau */
+
   .menu ul {
-    display: none; 
+    display: none;
   }
 
-  /* Style du menu déroulant (quand la classe 'show' est ajoutée par JS) */
-  .menu {
-    position: absolute;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    background-color: #E6F2FF;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  }
   .menu.show ul {
-    display: flex; /* Rétablit l'affichage des liens */
-    flex-direction: column;
-    gap: 15px;
-    padding: 20px;
-    text-align: center;
+    display: flex;
   }
 }
 
-/* Tablette ou grands téléphones en paysage (entre 600px et 768px) */
 @media (min-width: 601px) and (max-width: 768px) {
-    /* Garde le menu de bureau visible et cache l'icône hamburger */
-    .hamburger { display: none !important; }
-    .menu ul { display: flex !important; }
+  .hamburger { display: none; }
+  .menu ul { display: flex; }
 }
 
+/* ============================= */
+/* BANNIÈRE PRINCIPALE           */
+/* ============================= */
 
-/* ============================= */
-/* BANNIÈRES (SECTION IMAGE PRINCIPALE) */
-/* ============================= */
 .banner-container {
   position: relative;
   max-width: 100%;
@@ -146,8 +132,7 @@ h1, h2 {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-  animation: fadeInBanner 1.5s ease-in-out forwards;
-  transition: transform 0.3s ease;
+  z-index: 1;
 }
 
 .banner-container:hover .banner {
@@ -158,6 +143,7 @@ h1, h2 {
   width: 100%;
   height: auto;
   display: block;
+  transition: transform 0.3s ease;
 }
 
 .banner-text {
@@ -165,19 +151,18 @@ h1, h2 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: white; /* "Un héritage..." en blanc */
+  color: white;
   text-align: center;
   background: rgba(0, 0, 0, 0.4);
   padding: 20px 30px;
   border-radius: 12px;
-  animation: fadeInText 1.5s ease-in-out forwards;
 }
 
 .banner-text h2 {
   font-family: 'Playfair Display', serif;
   font-size: 2em;
   margin: 0;
-  color: white; /* "25 ans de lumière" en blanc */
+  color: white;
 }
 
 .banner-text p {
@@ -186,200 +171,10 @@ h1, h2 {
   margin-top: 10px;
 }
 
-@keyframes fadeInBanner {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeInText {
-  from { opacity: 0; transform: translate(-50%, -60%); }
-  to { opacity: 1; transform: translate(-50%, -50%); }
-}
-
 /* ============================= */
-/* FORMULAIRE (SECTION TÉMOIGNAGE) */
+/* MOT DU PRÉFET                 */
 /* ============================= */
 
-.form-section {
-  /* Dégradé Bleu Ciel vers Blanc */
-  background: linear-gradient(to bottom, #E6F2FF, #ffffff);
-  padding: 40px 20px;
-  max-width: 750px;
-  margin: auto;
-  border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.05);
-  animation: fadeIn 1s ease-in-out forwards;
-}
-
-.intro-box {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-/* Titre du formulaire/section (Témoignages...) */
-.intro-box h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2em;
-  color: #007ACC; /* Bleu Primaire */
-  margin-bottom: 10px;
-}
-
-.intro-box .subtitle {
-  font-style: italic;
-  color: #006BB3;
-  font-size: 1.1em;
-  margin-bottom: 10px;
-}
-
-.intro-box .description {
-  font-size: 1em;
-  color: #555;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 6px;
-  color: #333;
-}
-
-input, select, textarea {
-  width: 100%;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #CCE6FF; /* Bordure Bleu Ciel */
-  font-size: 1em;
-  font-family: 'Open Sans', sans-serif;
-  background-color: #fff;
-  color: #333;
-  box-sizing: border-box;
-}
-
-textarea {
-  resize: vertical;
-}
-
-.double {
-  display: flex;
-  gap: 10px;
-}
-
-button, button[type="submit"] {
-  /* Bleu plus vif pour les boutons d'action */
-  background-color: #0099FF;
-  color: white;
-  border: none;
-  padding: 14px 24px;
-  font-size: 1em;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  display: block;
-  margin: 30px auto 0;
-  font-weight: bold;
-}
-
-button:hover, button[type="submit"]:hover {
-  background-color: #006BB3; /* Bleu Secondaire (survol) */
-}
-
-@media (max-width: 600px) {
-  .double {
-    flex-direction: column;
-  }
-}
-
-
-/* ============================= */
-/* CARTE DE TÉMOIGNAGE           */
-/* ============================= */
-.temoignage-card {
-  background-color: #fff;
-  border: 1px solid #CCE6FF;
-  border-radius: 12px;
-  padding: 20px;
-  margin: 20px auto;
-  max-width: 700px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  animation: fadeIn 0.8s ease-in-out;
-}
-
-.temoignage-header {
-  font-weight: bold;
-  color: #007ACC; /* Titre du témoignage en Bleu Primaire */
-  margin-bottom: 10px;
-}
-
-.periode {
-  font-size: 0.9em;
-  color: #006BB3; /* Bleu Secondaire */
-}
-
-.temoignage-message {
-  font-style: italic;
-  color: #555;
-  margin-bottom: 15px;
-}
-
-.temoignage strong {
-  color: #006BB3; /* Bleu Secondaire */
-}
-
-/* ============================= */
-/* DIVERS ET FOOTER              */
-/* ============================= */
-
-/* Bouton Whatsapp (couleur standard gardée pour l'identité de la marque) */
-.whatsapp-button {
-  background-color: #25D366;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 10px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.whatsapp-button img {
-  width: 20px;
-  height: 20px;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  font-size: 0.9em;
-  color: #777;
-  margin-top: 40px;
-}
-
-/* Impression */
-@media print {
-  .menu, button, .whatsapp-button, .navbar {
-    display: none !important;
-  }
-  body {
-    background: white !important;
-    color: black !important;
-    font-family: 'Georgia', serif !important;
-  }
-  .temoignage-card {
-    border: none !important;
-    box-shadow: none !important;
-    page-break-after: always;
-  }
-}
-/* MOT DU PRÉFET */
 .mot-prefet {
   background-color: #e6f2ff;
   padding: 40px 20px;
@@ -429,3 +224,130 @@ footer {
   font-weight: bold;
   color: #007acc;
 }
+
+/* ============================= */
+/* FORMULAIRE DE TÉMOIGNAGE      */
+/* ============================= */
+
+.form-section {
+  background: linear-gradient(to bottom, #E6F2FF, #ffffff);
+  padding: 40px 20px;
+  max-width: 750px;
+  margin: auto;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+}
+
+.intro-box {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.intro-box h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2em;
+  color: #007ACC;
+  margin-bottom: 10px;
+}
+
+.intro-box .subtitle {
+  font-style: italic;
+  color: #006BB3;
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}
+
+.intro-box .description {
+  font-size: 1em;
+  color: #555;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #CCE6FF;
+  font-size: 1em;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #fff;
+  color: #333;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.double {
+  display: flex;
+  gap: 10px;
+}
+
+@media (max-width: 600px) {
+  .double {
+    flex-direction: column;
+  }
+}
+
+button, button[type="submit"] {
+  background-color: #0099FF;
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  font-size: 1em;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: block;
+  margin: 30px auto 0;
+  font-weight: bold;
+}
+
+button:hover, button[type="submit"]:hover {
+  background-color: #006BB3;
+}
+
+/* ============================= */
+/* TÉMOIGNAGES                   */
+/* ============================= */
+
+.temoignage-card {
+  background-color: #fff;
+  border: 1px solid #CCE6FF;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 700px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.temoignage-header {
+  font-weight: bold;
+  color: #007ACC;
+  margin-bottom: 10px;
+}
+
+.periode {
+  font-size: 0.9em;
+  color: #006BB3;
+}
+
+.temoignage-message {
+  font-style: italic;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.temoignage strong {
+  color: #
