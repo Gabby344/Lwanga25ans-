@@ -1,8 +1,13 @@
+/*
+ * Feuille de style CSS complète
+ * Thème : Bleu Ciel (Couleur de l'école)
+ * Optimisé pour le mobile (gestion du menu hamburger)
+ */
+
 /* ============================= */
-/* STYLE GÉNÉRAL       */
+/* STYLE GÉNÉRAL ET TYPOGRAPHIE  */
 /* ============================= */
 
-/* Style global */
 body {
   font-family: 'Open Sans', sans-serif;
   /* Fond Bleu Ciel très clair */
@@ -18,22 +23,23 @@ body {
   to { opacity: 1; }
 }
 
-/* Titres */
+/* Titres H1 et H2 */
 h1, h2 {
   /* Bleu Primaire (de l'école) par défaut */
   color: #007ACC;
   font-family: 'Playfair Display', serif;
 }
 
-/* Sous-titres */
+/* Sous-titres (Description du formulaire, etc.) */
 .subtitle {
   /* Bleu Secondaire */
   color: #006BB3;
 }
 
 /* ============================= */
-/* MENU DE NAVIGATION    */
+/* MENU DE NAVIGATION (DESKTOP & MOBILE) */
 /* ============================= */
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -46,25 +52,26 @@ h1, h2 {
   z-index: 1000;
 }
 
+/* Logo (Texte "Institut Saint Charles Lwanga" en haut à gauche) */
 .logo {
   font-family: 'Playfair Display', serif;
   font-size: 1.3em;
-  /* <<< MODIFICATION ICI : Logo en Bleu Primaire >>> */
   color: #007ACC; /* Bleu Primaire de l'école */
   font-weight: bold;
 }
 
+/* Icône Hamburger (Menu Mobile) */
 .hamburger {
   font-size: 1.8em;
   cursor: pointer;
-  /* Bleu Primaire */
-  color: #007ACC;
-  display: none;
+  color: #007ACC !important; /* Force la couleur bleue pour l'icône */
+  display: none; /* Caché par défaut, affiché par media query */
 }
 
+/* Liste des liens de navigation (Desktop) */
 .menu ul {
   display: flex;
-  justify-content: center; /* Centrer les éléments du menu */
+  justify-content: center;
   gap: 40px;
   list-style: none;
   margin: 0;
@@ -73,8 +80,7 @@ h1, h2 {
 
 .menu li a {
   text-decoration: none;
-  /* Bleu Primaire */
-  color: #007ACC;
+  color: #007ACC; /* Bleu Primaire */
   font-weight: 600;
   font-size: 1.05em;
   font-family: 'Open Sans', sans-serif;
@@ -84,40 +90,54 @@ h1, h2 {
 }
 
 .menu li a:hover {
-  /* Bleu Secondaire (survol) */
-  color: #006BB3;
-  /* <<< MODIFICATION ICI : Bordure de survol en Bleu Primaire >>> */
+  color: #006BB3; /* Bleu Secondaire (survol) */
   border-bottom: 2px solid #007ACC;
 }
 
-/* Responsive Menu */
-@media (max-width: 768px) {
+/* ============================= */
+/* RÉPONSE ADAPTATIVE (@MEDIA)   */
+/* ============================= */
+
+/* Mobile (Portait et Paysage) - Écrans <= 600px */
+@media (max-width: 600px) {
+  /* Afficher l'icône hamburger */
   .hamburger {
-    display: block;
+    display: block !important;
   }
+  
+  /* Cacher le menu de bureau */
+  .menu ul {
+    display: none; 
+  }
+
+  /* Style du menu déroulant (quand la classe 'show' est ajoutée par JS) */
   .menu {
-    display: none;
     position: absolute;
     top: 60px;
     left: 0;
     width: 100%;
-    /* Fond Bleu Ciel très clair */
     background-color: #E6F2FF;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   }
-  .menu ul {
+  .menu.show ul {
+    display: flex; /* Rétablit l'affichage des liens */
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
     padding: 20px;
     text-align: center;
   }
-  .menu.show {
-    display: block;
-  }
 }
 
+/* Tablette ou grands téléphones en paysage (entre 600px et 768px) */
+@media (min-width: 601px) and (max-width: 768px) {
+    /* Garde le menu de bureau visible et cache l'icône hamburger */
+    .hamburger { display: none !important; }
+    .menu ul { display: flex !important; }
+}
+
+
 /* ============================= */
-/* BANNIÈRES            */
+/* BANNIÈRES (SECTION IMAGE PRINCIPALE) */
 /* ============================= */
 .banner-container {
   position: relative;
@@ -127,29 +147,17 @@ h1, h2 {
   overflow: hidden;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
   animation: fadeInBanner 1.5s ease-in-out forwards;
-  transition: transform 0.3s ease; /* Ajouté pour l'animation hover */
+  transition: transform 0.3s ease;
 }
 
 .banner-container:hover .banner {
   transform: scale(1.02);
 }
 
-@keyframes fadeInBanner {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .banner {
   width: 100%;
   height: auto;
   display: block;
-  /* transition: transform 0.3s ease; // Déplacé vers .banner-container */
 }
 
 .banner-text {
@@ -157,10 +165,9 @@ h1, h2 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  /* <<< MODIFICATION ICI : Texte de la bannière en Blanc >>> */
-  color: white;
+  color: white; /* "Un héritage..." en blanc */
   text-align: center;
-  background: rgba(0, 0, 0, 0.4); /* Fond semi-transparent pour la lisibilité */
+  background: rgba(0, 0, 0, 0.4);
   padding: 20px 30px;
   border-radius: 12px;
   animation: fadeInText 1.5s ease-in-out forwards;
@@ -170,31 +177,27 @@ h1, h2 {
   font-family: 'Playfair Display', serif;
   font-size: 2em;
   margin: 0;
-  /* Le h2 hérite du blanc du .banner-text */
-  color: white; /* Assurez-vous que le titre est bien blanc */
+  color: white; /* "25 ans de lumière" en blanc */
 }
 
 .banner-text p {
   font-family: 'Open Sans', sans-serif;
   font-size: 1em;
   margin-top: 10px;
-  /* Le p hérite du blanc du .banner-text */
+}
+
+@keyframes fadeInBanner {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeInText {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -60%);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-  }
+  from { opacity: 0; transform: translate(-50%, -60%); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
 }
 
-
 /* ============================= */
-/* FORMULAIRE         */
+/* FORMULAIRE (SECTION TÉMOIGNAGE) */
 /* ============================= */
 
 .form-section {
@@ -213,17 +216,16 @@ h1, h2 {
   margin-bottom: 30px;
 }
 
+/* Titre du formulaire/section (Témoignages...) */
 .intro-box h1 {
   font-family: 'Playfair Display', serif;
   font-size: 2em;
-  /* <<< MODIFICATION ICI : Titre du formulaire en Bleu Primaire >>> */
-  color: #007ACC; /* Bleu Primaire de l'école */
+  color: #007ACC; /* Bleu Primaire */
   margin-bottom: 10px;
 }
 
-.intro-box .subtitle { /* Cibler spécifiquement le subtitle dans intro-box */
+.intro-box .subtitle {
   font-style: italic;
-  /* Bleu Secondaire */
   color: #006BB3;
   font-size: 1.1em;
   margin-bottom: 10px;
@@ -249,13 +251,12 @@ input, select, textarea {
   width: 100%;
   padding: 12px;
   border-radius: 8px;
-  /* Bordure Bleu Ciel */
-  border: 1px solid #CCE6FF;
+  border: 1px solid #CCE6FF; /* Bordure Bleu Ciel */
   font-size: 1em;
   font-family: 'Open Sans', sans-serif;
   background-color: #fff;
   color: #333;
-  box-sizing: border-box; /* Assure le bon dimensionnement */
+  box-sizing: border-box;
 }
 
 textarea {
@@ -267,8 +268,8 @@ textarea {
   gap: 10px;
 }
 
-button[type="submit"] {
-  /* Bleu plus vif pour le bouton principal */
+button, button[type="submit"] {
+  /* Bleu plus vif pour les boutons d'action */
   background-color: #0099FF;
   color: white;
   border: none;
@@ -282,9 +283,8 @@ button[type="submit"] {
   font-weight: bold;
 }
 
-button[type="submit"]:hover {
-  /* Bleu Secondaire (survol) */
-  background-color: #006BB3;
+button:hover, button[type="submit"]:hover {
+  background-color: #006BB3; /* Bleu Secondaire (survol) */
 }
 
 @media (max-width: 600px) {
@@ -295,11 +295,11 @@ button[type="submit"]:hover {
 
 
 /* ============================= */
-/* TÉMOIGNAGES          */
+/* CARTE DE TÉMOIGNAGE           */
 /* ============================= */
 .temoignage-card {
   background-color: #fff;
-  border: 1px solid #CCE6FF; /* Bordure plus douce */
+  border: 1px solid #CCE6FF;
   border-radius: 12px;
   padding: 20px;
   margin: 20px auto;
@@ -310,15 +310,13 @@ button[type="submit"]:hover {
 
 .temoignage-header {
   font-weight: bold;
-  /* <<< MODIFICATION ICI : Titre Témoignage en Bleu Primaire >>> */
-  color: #007ACC; /* Bleu Primaire */
+  color: #007ACC; /* Titre du témoignage en Bleu Primaire */
   margin-bottom: 10px;
 }
 
 .periode {
   font-size: 0.9em;
-  /* Bleu Secondaire */
-  color: #006BB3;
+  color: #006BB3; /* Bleu Secondaire */
 }
 
 .temoignage-message {
@@ -328,12 +326,11 @@ button[type="submit"]:hover {
 }
 
 .temoignage strong {
-  /* Bleu Secondaire */
-  color: #006BB3;
+  color: #006BB3; /* Bleu Secondaire */
 }
 
 /* ============================= */
-/* DIVERS             */
+/* DIVERS ET FOOTER              */
 /* ============================= */
 
 /* Bouton Whatsapp (couleur standard gardée pour l'identité de la marque) */
@@ -348,6 +345,9 @@ button[type="submit"]:hover {
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .whatsapp-button img {
@@ -362,7 +362,6 @@ footer {
   color: #777;
   margin-top: 40px;
 }
-
 
 /* Impression */
 @media print {
@@ -380,36 +379,3 @@ footer {
     page-break-after: always;
   }
 }
-/* ============================= */
-/* MENU DE NAVIGATION    */
-/* ============================= */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #fff;
-  padding: 15px 20px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-.logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.3em;
-  color: #007ACC;
-  font-weight: bold;
-}
-
-/* --- VÉRIFIEZ CETTE RÈGLE --- */
-.hamburger {
-  font-size: 1.8em;
-  cursor: pointer;
-  /* J'ajoute !important pour garantir que la couleur bleue est appliquée */
-  color: #007ACC !important; 
-  display: none;
-}
-/* ----------------------------- */
-
-/* ... le reste du code du menu (menu ul, menu li a) ... */
