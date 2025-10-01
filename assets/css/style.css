@@ -380,3 +380,36 @@ footer {
     page-break-after: always;
   }
 }
+/* ============================= */
+/* MENU DE NAVIGATION    */
+/* ============================= */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 15px 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3em;
+  color: #007ACC;
+  font-weight: bold;
+}
+
+/* --- VÉRIFIEZ CETTE RÈGLE --- */
+.hamburger {
+  font-size: 1.8em;
+  cursor: pointer;
+  /* J'ajoute !important pour garantir que la couleur bleue est appliquée */
+  color: #007ACC !important; 
+  display: none;
+}
+/* ----------------------------- */
+
+/* ... le reste du code du menu (menu ul, menu li a) ... */
