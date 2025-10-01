@@ -20,7 +20,7 @@ body {
 
 /* Titres */
 h1, h2 {
-  /* Bleu Primaire (de l'école) */
+  /* Bleu Primaire (de l'école) par défaut */
   color: #007ACC;
   font-family: 'Playfair Display', serif;
 }
@@ -49,8 +49,8 @@ h1, h2 {
 .logo {
   font-family: 'Playfair Display', serif;
   font-size: 1.3em;
-  /* Bleu Primaire */
-  color: #007ACC;
+  /* <<< MODIFICATION ICI : Logo en Bleu Primaire >>> */
+  color: #007ACC; /* Bleu Primaire de l'école */
   font-weight: bold;
 }
 
@@ -64,6 +64,7 @@ h1, h2 {
 
 .menu ul {
   display: flex;
+  justify-content: center; /* Centrer les éléments du menu */
   gap: 40px;
   list-style: none;
   margin: 0;
@@ -85,6 +86,7 @@ h1, h2 {
 .menu li a:hover {
   /* Bleu Secondaire (survol) */
   color: #006BB3;
+  /* <<< MODIFICATION ICI : Bordure de survol en Bleu Primaire >>> */
   border-bottom: 2px solid #007ACC;
 }
 
@@ -115,6 +117,83 @@ h1, h2 {
 }
 
 /* ============================= */
+/* BANNIÈRES            */
+/* ============================= */
+.banner-container {
+  position: relative;
+  max-width: 100%;
+  margin: 30px auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  animation: fadeInBanner 1.5s ease-in-out forwards;
+  transition: transform 0.3s ease; /* Ajouté pour l'animation hover */
+}
+
+.banner-container:hover .banner {
+  transform: scale(1.02);
+}
+
+@keyframes fadeInBanner {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.banner {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* transition: transform 0.3s ease; // Déplacé vers .banner-container */
+}
+
+.banner-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* <<< MODIFICATION ICI : Texte de la bannière en Blanc >>> */
+  color: white;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.4); /* Fond semi-transparent pour la lisibilité */
+  padding: 20px 30px;
+  border-radius: 12px;
+  animation: fadeInText 1.5s ease-in-out forwards;
+}
+
+.banner-text h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2em;
+  margin: 0;
+  /* Le h2 hérite du blanc du .banner-text */
+  color: white; /* Assurez-vous que le titre est bien blanc */
+}
+
+.banner-text p {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+  margin-top: 10px;
+  /* Le p hérite du blanc du .banner-text */
+}
+
+@keyframes fadeInText {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+
+/* ============================= */
 /* FORMULAIRE         */
 /* ============================= */
 
@@ -129,20 +208,34 @@ h1, h2 {
   animation: fadeIn 1s ease-in-out forwards;
 }
 
+.intro-box {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
 .intro-box h1 {
   font-family: 'Playfair Display', serif;
   font-size: 2em;
-  /* Bleu Primaire */
-  color: #007ACC;
+  /* <<< MODIFICATION ICI : Titre du formulaire en Bleu Primaire >>> */
+  color: #007ACC; /* Bleu Primaire de l'école */
   margin-bottom: 10px;
 }
 
-.subtitle {
+.intro-box .subtitle { /* Cibler spécifiquement le subtitle dans intro-box */
   font-style: italic;
   /* Bleu Secondaire */
   color: #006BB3;
   font-size: 1.1em;
   margin-bottom: 10px;
+}
+
+.intro-box .description {
+  font-size: 1em;
+  color: #555;
+}
+
+.form-group {
+  margin-bottom: 20px;
 }
 
 .form-group label {
@@ -163,6 +256,10 @@ input, select, textarea {
   background-color: #fff;
   color: #333;
   box-sizing: border-box; /* Assure le bon dimensionnement */
+}
+
+textarea {
+  resize: vertical;
 }
 
 .double {
@@ -202,7 +299,7 @@ button[type="submit"]:hover {
 /* ============================= */
 .temoignage-card {
   background-color: #fff;
-  border: 1px solid #cce6ff;
+  border: 1px solid #CCE6FF; /* Bordure plus douce */
   border-radius: 12px;
   padding: 20px;
   margin: 20px auto;
@@ -213,7 +310,8 @@ button[type="submit"]:hover {
 
 .temoignage-header {
   font-weight: bold;
-  color: #333;
+  /* <<< MODIFICATION ICI : Titre Témoignage en Bleu Primaire >>> */
+  color: #007ACC; /* Bleu Primaire */
   margin-bottom: 10px;
 }
 
@@ -265,39 +363,6 @@ footer {
   margin-top: 40px;
 }
 
-/* Bannières */
-.banner-container {
-  position: relative;
-  max-width: 100%;
-  margin: 30px auto;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-}
-
-.banner {
-  width: 100%;
-  height: auto;
-  display: block;
-  transition: transform 0.3s ease;
-}
-
-.banner-container:hover .banner {
-  transform: scale(1.02);
-}
-
-.banner-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  text-align: center;
-  background: rgba(0, 0, 0, 0.4);
-  padding: 20px 30px;
-  border-radius: 12px;
-  animation: fadeInText 1.5s ease-in-out forwards;
-}
 
 /* Impression */
 @media print {
