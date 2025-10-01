@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Livre des témoignages — Institut Saint Charle Lwanga</title>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore-compat.js"></script>
+
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background-color: #fff;
+      color: #333;
+      padding: 40px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #d94f70;
+      margin-bottom: 10px;
+    }
+
+    .intro {
+      text-align: center;
+      font-style: italic;
+      margin-bottom: 30px;
+      font-size: 1.1em;
+    }
+
+    .temoignage {
+      border-bottom: 1px solid #ccc;
+      padding: 20px 0;
+      page-break-inside: avoid;
+    }
+
+    .temoignage strong {
+      color: #a03c6f;
+    }
+
+    button {
+      display: block;
+      margin: 30px auto;
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #d94f70;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #c03b5f;
+    }
+
+    @media print {
+      button { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Livre des témoignages</h1>
+  <div class="intro">“Chaque mot est une lumière dans le cœur de notre école.”</div>
+
+  <div id="livre"></div>
+
+  <button onclick="window.print()">🖨️ Imprimer ce livre</button>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAuHPWVOkd96xPqKQ_K1cC4n4ihuPfuNFQ",
+      authDomain: "abiga-1718.firebaseapp.com",
+      projectId: "abiga-1718",
+      storageBucket: "abiga-1718.appspot.com",
+      messagingSenderId: "103455679291",
+      appId: "1:103455679291:web:eda13441fedfce226d4d1e"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const livre = document.getElementById('livre');
+
+    db.collection("temoignages").orderBy("timestamp", "asc").get().then(snapshot => {
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        const nom = data.nom || "Anonyme";
+        const role = data.role || "Rôle inconnu";
+        const annee = data.annee || "Année inconnue";
+        const message = data.message || "(Message vide)";
+        const date = data.timestamp
+          ? new Date(data.timestamp).toLocaleDateString('fr-FR', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric'
+            })
+          : "Date inconnue";
+
+        const div = document.createElement('div');
+        div.className = 'temoignage';
+        div.innerHTML = `
+          <strong>${nom}</strong> — ${role} (${annee})<br>
+          <em>${date}</em>
+          <p>${message}</p>
+        `;
+        livre.appendChild(div);
+      });
+    }).catch(error => {
+      livre.innerHTML = "<p>Impossible de charger les témoignages.</p>";
+      console.error(error);
+    });
+  </script>
+</body>
+</html>
