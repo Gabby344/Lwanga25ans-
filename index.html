@@ -5,13 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>25 ans de lumière — Témoignages ISC Lwanga</title>
 
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet" />
-
-  <!-- Feuille de style -->
   <link rel="stylesheet" href="assets/css/style.css" />
 
-  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore-compat.js"></script>
 </head>
@@ -19,7 +15,7 @@
 
   <header>
     <div class="navbar">
-      <div class="logo">Institut Saint Charles Lwanga</div>
+      <div class="logo">ISC Lwanga</div>
       <div class="hamburger" onclick="toggleMenu()">☰</div>
     </div>
     <nav class="menu" id="menu">
@@ -33,12 +29,31 @@
   </header>
 
   <div class="banner-container">
-    <img src="courlwanga.jpg" alt="Bannière ISC 25 ans" class="banner">
+    <img src="assets/images/courlwanga.jpg" alt="Bannière ISC 25 ans" class="banner">
     <div class="banner-text">
       <h2>🎉 25 ans de lumière</h2>
       <p>Un héritage d’excellence, de foi et de fraternité</p>
     </div>
   </div>
+
+  <section class="mot-prefet">
+    <h2>🕊️ Mot du Père Michel Lembe, Sds</h2>
+    <p class="subtitle">Préfet de l’Institut Saint Charles Lwanga</p>
+    <div class="mot-container">
+      <img src="assets/images/pere-michel.jpg" alt="Père Michel Lembe" class="mot-photo" />
+      <div class="mot-box">
+        <p>
+          « En cette année jubilaire, nous célébrons 25 ans de lumière, de foi et de fraternité.  
+          L’Institut Saint Charles Lwanga n’est pas seulement un lieu d’apprentissage,  
+          c’est une maison de croissance humaine et spirituelle.  
+          Merci à chaque élève, chaque enseignant, chaque ami de l’école  
+          qui a contribué à bâtir ce patrimoine vivant.  
+          Que cette mémoire nous inspire à aller plus loin, ensemble. »
+        </p>
+        <p class="signature">— Père Michel Lembe, Sds</p>
+      </div>
+    </div>
+  </section>
 
   <section class="form-section">
     <div class="intro-box">
@@ -109,15 +124,8 @@
     const finSelect = document.getElementById('fin');
 
     for (let y = 2000; y <= 2025; y++) {
-      const opt1 = document.createElement('option');
-      opt1.value = y;
-      opt1.textContent = y;
-      debutSelect.appendChild(opt1);
-
-      const opt2 = document.createElement('option');
-      opt2.value = y;
-      opt2.textContent = y;
-      finSelect.appendChild(opt2);
+      debutSelect.innerHTML += `<option value="${y}">${y}</option>`;
+      finSelect.innerHTML += `<option value="${y}">${y}</option>`;
     }
 
     form.addEventListener('submit', async function(e) {
