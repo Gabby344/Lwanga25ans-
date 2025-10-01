@@ -1,131 +1,46 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <link rel="stylesheet" href="assets/css/style.css" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>25 ans de lumière — Témoignages Institut Saint Charles Lwanga</title>
+  <title>25 ans de lumière — Témoignages ISC Lwanga</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet" />
+
+  <!-- Feuille de style -->
+  <link rel="stylesheet" href="assets/css/style.css" />
 
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore-compat.js"></script>
-
-  <style>
-    body {
-      <nav class="menu">
-  <a href="index.html">Accueil</a>
-  <a href="livre.html">Livre</a>
-  <a href="about.html">À propos</a>
-  <a href="contact.html">Contact</a>
-</nav>
-
-      font-family: 'Open Sans', sans-serif;
-      background: linear-gradient(to right, #fffaf0, #ffe4e1);
-      color: #333;
-      padding: 20px;
-      text-align: center;
-      animation: fadeIn 2s forwards;
-    }
-
-    @keyframes fadeIn { to { opacity: 1; } }
-
-    .banner {
-      max-width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      margin-bottom: 30px;
-    }
-
-    h1 {
-      color: #d94f70;
-      font-size: 2em;
-      margin-bottom: 10px;
-    }
-
-    form {
-      background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      max-width: 600px;
-      margin: auto;
-    }
-
-    input, select, textarea {
-      width: 90%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      font-size: 1em;
-    }
-
-    button {
-      padding: 10px 20px;
-      background-color: #d94f70;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    button:hover {
-      background-color: #c03b5f;
-    }
-
-    .temoignage {
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 15px;
-      margin: 15px auto;
-      width: 90%;
-      text-align: left;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    .whatsapp-button {
-      background-color: #25D366;
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 6px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-
-    .whatsapp-button img {
-      height: 18px;
-    }
-
-    footer {
-      margin-top: 40px;
-      font-size: 0.9em;
-      color: #777;
-    }
-  </style>
 </head>
 <body>
 
-  <img src="https://raw.githubusercontent.com/Gabby344/Abigael-Livre-/main/image/ISC-banner.png" alt="Bannière ISC 25 ans" class="banner">
+  <header>
+    <nav class="menu">
+      <a href="index.html">Accueil</a>
+      <a href="livre.html">Livre</a>
+      <a href="about.html">À propos</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <img src="assets/images/ISC-banner.png" alt="Bannière ISC 25 ans" class="banner">
 
   <h1>📖 Témoignages pour les 25 ans de l’Institut Saint Charles Lwanga</h1>
-  <p>Partage ton souvenir, ton gratitude ou ton message d’encouragement.</p>
+  <p>Partage ton souvenir, ta gratitude ou ton message d’encouragement.</p>
 
   <form id="temoignageForm">
     <input type="text" id="nom" placeholder="Ton nom complet" required />
 
     <select id="role" required>
       <option value="">Tu es...</option>
-      <option value="Élève">Élève</option>
-      <option value="Enseignant">Enseignant</option>
-      <option value="Directeur">Directeur</option>
-      <option value="Préfet">Préfet</option>
-      <option value="Ami de l’école">Ami de l’école</option>
+      <option value="Élève">🎓 Élève</option>
+      <option value="Enseignant">👨‍🏫 Enseignant</option>
+      <option value="Directeur">🎖️ Directeur</option>
+      <option value="Préfet">📘 Préfet</option>
+      <option value="Ami de l’école">🤝 Ami de l’école</option>
     </select>
 
     <select id="annee" required>
@@ -138,7 +53,7 @@
 
   <div id="livre"></div>
 
-  <footer>Conçu avec amour par <strong>Gabby Umba</strong> — Kolwezi, 2025</footer>
+  <footer>© 2025 Institut Saint Charles Lwanga — conçu avec ❤️ par Gabby Umba</footer>
 
   <script>
     const firebaseConfig = {
@@ -156,7 +71,6 @@
     const form = document.getElementById('temoignageForm');
     const livre = document.getElementById('livre');
 
-    // Générer les années dynamiquement
     const anneeSelect = document.getElementById('annee');
     for (let y = 2000; y <= 2025; y++) {
       const opt = document.createElement('option');
