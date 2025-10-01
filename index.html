@@ -43,9 +43,14 @@
       <option value="Ami de l’école">🤝 Ami de l’école</option>
     </select>
 
-    <select id="annee" required>
-      <option value="">Année de passage</option>
-    </select>
+    <div style="display: flex; gap: 10px; justify-content: center;">
+      <select id="debut" required>
+        <option value="">Début</option>
+      </select>
+      <select id="fin" required>
+        <option value="">Fin</option>
+      </select>
+    </div>
 
     <textarea id="message" rows="4" placeholder="Ton témoignage, souvenir ou bénédiction" required></textarea>
     <button type="submit">Ajouter au livre</button>
@@ -71,30 +76,40 @@
     const form = document.getElementById('temoignageForm');
     const livre = document.getElementById('livre');
 
-    const anneeSelect = document.getElementById('annee');
+    const debutSelect = document.getElementById('debut');
+    const finSelect = document.getElementById('fin');
+
     for (let y = 2000; y <= 2025; y++) {
-      const opt = document.createElement('option');
-      opt.value = y;
-      opt.textContent = y;
-      anneeSelect.appendChild(opt);
+      const opt1 = document.createElement('option');
+      opt1.value = y;
+      opt1.textContent = y;
+      debutSelect.appendChild(opt1);
+
+      const opt2 = document.createElement('option');
+      opt2.value = y;
+      opt2.textContent = y;
+      finSelect.appendChild(opt2);
     }
 
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
       const nom = document.getElementById('nom').value.trim();
       const role = document.getElementById('role').value;
-      const annee = document.getElementById('annee').value;
+      const debut = document.getElementById('debut').value;
+      const fin = document.getElementById('fin').value;
       const message = document.getElementById('message').value.trim();
 
-      if (!nom || !role || !annee || message.length < 5) {
+      if (!nom || !role || !debut || !fin || message.length < 5) {
         alert("Merci de remplir tous les champs avec sincérité.");
         return;
       }
 
+      const periode = `${debut}–${fin}`;
+
       await db.collection("temoignages").add({
         nom,
         role,
-        annee,
+        periode,
         message,
         timestamp: Date.now()
       });
@@ -114,7 +129,7 @@
         const div = document.createElement('div');
         div.className = 'temoignage';
         div.innerHTML = `
-          <strong>${data.nom || "Anonyme"}</strong> — ${data.role || "Rôle inconnu"} (${data.annee || "Année inconnue"})<br>
+          <strong>${data.nom || "Anonyme"}</strong> — ${data.role || "Rôle inconnu"} (${data.periode || "Période inconnue"})<br>
           <p>${data.message}</p>
           <button class="whatsapp-button" onclick="shareWhatsApp('${data.message.replace(/'/g, "\\'")}')">
             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
