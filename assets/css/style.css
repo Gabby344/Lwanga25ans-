@@ -680,4 +680,67 @@ button[type="submit"] {
 button[type="submit"]:hover {
   background-color: #006bb3;
 }
+/* Fond général */
+body {
+  background-color: #e6f2ff;
+  font-family: 'Open Sans', sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* Titres */
+h1, h2 {
+  color: #007acc;
+  font-family: 'Playfair Display', serif;
+}
+
+/* Sous-titres */
+.subtitle {
+  color: #006bb3;
+}
+
+/* Menu */
+.menu li a {
+  color: #007acc !important;
+}
+
+.menu li a:hover {
+  color: #006bb3 !important;
+  border-bottom: 2px solid #007acc;
+}
+
+/* Formulaire */
+.form-section {
+  background: linear-gradient(to bottom, #e6f2ff, #ffffff);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+input, select, textarea {
+  border: 1px solid #cce6ff;
+  background-color: #fff;
+  color: #333;
+  padding: 10px;
+  border-radius: 6px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Bouton */
+button[type="submit"] {
+  background-color: #0099ff;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #006bb3;
+}
 
