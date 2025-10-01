@@ -21,15 +21,15 @@
     <div class="navbar">
       <div class="logo">ISC Lwanga</div>
       <div class="hamburger" onclick="toggleMenu()">☰</div>
-      <nav class="menu" id="menu">
-        <ul>
-          <li><a href="index.html">🏠 Accueil</a></li>
-          <li><a href="livre.html">📖 Livre</a></li>
-          <li><a href="about.html">📜 À propos</a></li>
-          <li><a href="contact.html">✉️ Contact</a></li>
-        </ul>
-      </nav>
     </div>
+    <nav class="menu" id="menu">
+      <ul>
+        <li><a href="index.html">🏠 Accueil</a></li>
+        <li><a href="livre.html">📖 Livre</a></li>
+        <li><a href="about.html">📜 À propos</a></li>
+        <li><a href="contact.html">✉️ Contact</a></li>
+      </ul>
+    </nav>
   </header>
 
   <div class="banner-container">
@@ -144,6 +144,8 @@
       });
 
       form.reset();
+      alert("✨ Merci pour ton témoignage ! Il a bien été ajouté au livre.");
+      window.location.href = "livre.html";
     });
 
     function toggleMenu() {
