@@ -21,8 +21,7 @@
     <nav class="menu" id="menu">
       <ul>
         <li><a href="index.html">🏠 Accueil</a></li>
-        i><a href="motduprefet.html">📖 Le Mot Du Préfet</a></li>
-        <li><a href="livre.html">📖 Livre</a></li>
+        <li><a href="livre.html">📖 Livre des temoignages</a></li>
         <li><a href="about.html">📜 À propos</a></li>
         <li><a href="contact.html">✉️ Contact</a></li>
       </ul>
@@ -47,31 +46,34 @@
 
     <form id="temoignageForm">
       <div class="form-group">
-        <label for="nom">🖋️ Ton nom complet</label>
+        <label for="nom"> Veuillez saisir votre nom complet</label>
         <input type="text" id="nom" required />
       </div>
 
       <div class="form-group">
-        <label for="role">🎭 Tu es...</label>
+        <label for="role"> Choisissez...</label>
         <select id="role" required>
-          <option value="">Choisir un rôle</option>
-          <option value="Élève">🎓 Élève</option>
-          <option value="Enseignant">👨‍🏫 Enseignant</option>
-          <option value="Directeur">🎖️ Directeur</option>
-          <option value="Préfet">📘 Préfet</option>
-          <option value="Ami de l’école">🤝 Ami de l’école</option>
+          <option value="">Veuillez choisir votre un rôle</option>
+          <option value="Élève">🎓 Élève Actuel(le)</option>
+          <option value="Élève">🎓 Élève Ancien(ne)</option>
+          <option value="Enseignant">👨‍🏫 Enseignant(e) Actuel(le)</option>
+          <option value="Enseignant">👨‍🏫 Enseignant(e) Ancien(ne)</option>
+          <option value="Directeur"> 👨‍🏫Directeur (Tous)</option>
+          <option value="Préfet">👨‍🏫Préfet (Tous)</option>
+          <option value="Ami de l’école">🤝 Partenaire,Ami(es) de l’école</option>
+          <option value="autre"> 👨🏾‍💼Autre </option>
         </select>
       </div>
 
       <div class="form-group double">
         <div>
-          <label for="debut">📅 Début</label>
+          <label for="debut">Année de debut</label>
           <select id="debut" required>
             <option value="">Année</option>
           </select>
         </div>
         <div>
-          <label for="fin">📅 Fin</label>
+          <label for="fin">Année de fin</label>
           <select id="fin" required>
             <option value="">Année</option>
           </select>
@@ -79,15 +81,15 @@
       </div>
 
       <div class="form-group">
-        <label for="message">💬 Ton témoignage, souvenir ou bénédiction</label>
+        <label for="message">💬 Veuiller saisir votre message, souvenir ou bénédiction</label>
         <textarea id="message" rows="4" required></textarea>
       </div>
 
-      <button type="submit">✨ Ajouter au livre</button>
+      <button type="submit">✨ Appuyez ici pour ajoutez votre temoignages</button>
     </form>
   </section>
 
-  <footer>© 2025 Institut Saint Charles Lwanga — conçu avec ❤️ par Gabby Umba</footer>
+  <footer>© 2025 Institut Saint Charles Lwanga — Gabby Umba</footer>
 
   <script>
     const firebaseConfig = {
