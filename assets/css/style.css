@@ -1,3 +1,9 @@
+/*
+ * Feuille de style CSS complète
+ * Thème : Bleu Ciel (Couleur de l'école)
+ * Optimisé pour le mobile (gestion du menu hamburger)
+ */
+
 /* ============================= */
 /* STYLE GÉNÉRAL ET TYPOGRAPHIE  */
 /* ============================= */
@@ -25,6 +31,7 @@ section {
   transform: translateY(30px);
   animation: fadeUp 1s ease-out forwards;
   animation-delay: 0.3s;
+  padding: 20px; /* Ajouté pour un espacement correct autour des sections */
 }
 
 @keyframes fadeUp {
@@ -69,12 +76,12 @@ h1, h2 {
 .hamburger {
   font-size: 1.8em;
   cursor: pointer;
-  color: #007ACC;
+  color: #007ACC !important; /* Force la couleur bleue */
   display: none;
 }
 
 .menu {
-  display: none;
+  /* Retrait de l'affichage par défaut */
   position: absolute;
   top: 60px;
   left: 0;
@@ -84,24 +91,13 @@ h1, h2 {
   z-index: 9999;
 }
 
-.menu.show {
-  display: block;
-}
-
 .menu ul {
-  display: flex;
+  display: flex; /* Affichage Desktop par défaut */
   justify-content: center;
   gap: 40px;
   list-style: none;
   margin: 0;
   padding: 0;
-}
-
-.menu.show ul {
-  flex-direction: column;
-  gap: 15px;
-  padding: 20px;
-  text-align: center;
 }
 
 .menu li a {
@@ -112,6 +108,7 @@ h1, h2 {
   font-family: 'Open Sans', sans-serif;
   transition: color 0.3s ease;
   position: relative;
+  padding-bottom: 4px; /* Espace pour la barre de survol */
 }
 
 .menu li a::after {
@@ -133,23 +130,41 @@ h1, h2 {
   width: 100%;
 }
 
+/* Media Queries pour la gestion du menu mobile */
 @media (max-width: 600px) {
   .hamburger {
-    display: block;
+    display: block !important;
   }
 
+  /* Cacher le menu de bureau, préparer le menu déroulant */
+  .menu {
+    display: none;
+  }
   .menu ul {
     display: none;
   }
 
+  .menu.show {
+    display: block;
+  }
   .menu.show ul {
     display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    text-align: center;
   }
 }
 
 @media (min-width: 601px) and (max-width: 768px) {
-  .hamburger { display: none; }
-  .menu ul { display: flex; }
+  .hamburger { display: none !important; }
+  .menu ul { display: flex !important; }
+  .menu {
+    position: static;
+    display: block;
+    box-shadow: none;
+    background-color: transparent;
+  }
 }
 
 /* ============================= */
@@ -193,7 +208,7 @@ h1, h2 {
   font-family: 'Playfair Display', serif;
   font-size: 2em;
   margin: 0;
-  color: white;
+  color: white; /* Titre de la bannière en blanc */
 }
 
 .banner-text p {
@@ -353,4 +368,50 @@ button[type="submit"] {
   display: block;
   margin: 40px auto 0;
   font-weight: bold;
-  box-shadow
+  box-shadow: 0 4px 10px rgba(0, 153, 255, 0.4); /* Ajouté l'ombre de bouton manquante */
+}
+
+button[type="submit"]:hover {
+  background-color: #006BB3;
+}
+
+/* ============================= */
+/* DIVERS ET FOOTER              */
+/* ============================= */
+
+/* Bouton Whatsapp */
+.whatsapp-button {
+  background-color: #25D366;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: background-color 0.3s ease;
+}
+
+.whatsapp-button:hover {
+  background-color: #1DA851;
+}
+
+/* LOGO WHATSAPP RÉDUIT */
+.whatsapp-button img {
+  width: 18px; 
+  height: 18px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  font-size: 0.9em;
+  color: #777;
+  margin-top: 40px;
+  padding: 20px;
+}
