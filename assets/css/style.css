@@ -2,6 +2,10 @@
 /* STYLE GÉNÉRAL ET TYPOGRAPHIE  */
 /* ============================= */
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
   background-color: #E6F2FF;
@@ -14,6 +18,20 @@ body {
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+section {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 1s ease-out forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 h1, h2 {
@@ -92,14 +110,27 @@ h1, h2 {
   font-weight: 600;
   font-size: 1.05em;
   font-family: 'Open Sans', sans-serif;
-  transition: color 0.3s ease, border-bottom 0.3s ease;
-  padding-bottom: 4px;
-  border-bottom: 2px solid transparent;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.menu li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background-color: #007ACC;
+  transition: width 0.3s ease;
 }
 
 .menu li a:hover {
   color: #006BB3;
-  border-bottom: 2px solid #007ACC;
+}
+
+.menu li a:hover::after {
+  width: 100%;
 }
 
 @media (max-width: 600px) {
@@ -231,231 +262,11 @@ h1, h2 {
 
 .form-section {
   background: linear-gradient(to bottom, #E6F2FF, #ffffff);
-  padding: 40px 20px;
-  max-width: 750px;
-  margin: auto;
-  border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.05);
-}
-
-.intro-box {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.intro-box h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2em;
-  color: #007ACC;
-  margin-bottom: 10px;
-}
-
-.intro-box .subtitle {
-  font-style: italic;
-  color: #006BB3;
-  font-size: 1.1em;
-  margin-bottom: 10px;
-}
-
-.intro-box .description {
-  font-size: 1em;
-  color: #555;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 6px;
-  color: #333;
-}
-
-input, select, textarea {
-  width: 100%;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #CCE6FF;
-  font-size: 1em;
-  font-family: 'Open Sans', sans-serif;
-  background-color: #fff;
-  color: #333;
-  box-sizing: border-box;
-}
-
-textarea {
-  resize: vertical;
-}
-
-.double {
-  display: flex;
-  gap: 10px;
-}
-
-@media (max-width: 600px) {
-  .double {
-    flex-direction: column;
-  }
-}
-
-button, button[type="submit"] {
-  background-color: #0099FF;
-  color: white;
-  border: none;
-  padding: 14px 24px;
-  font-size: 1em;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  display: block;
-  margin: 30px auto 0;
-  font-weight: bold;
-}
-
-button:hover, button[type="submit"]:hover {
-  background-color: #006BB3;
-}
-
-/* ============================= */
-/* TÉMOIGNAGES                   */
-/* ============================= */
-
-.temoignage-card {
-  background-color: #fff;
-  border: 1px solid #CCE6FF;
-  border-radius: 12px;
-  padding: 20px;
-  margin: 20px auto;
-  max-width: 700px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-
-.temoignage-header {
-  font-weight: bold;
-  color: #007ACC;
-  margin-bottom: 10px;
-}
-
-.periode {
-  font-size: 0.9em;
-  color: #006BB3;
-}
-
-.temoignage-message {
-  font-style: italic;
-  color: #555;
-  margin-bottom: 15px;
-}
-
-.temoignage strong {
-  color: #
-/* ============================= */
-/* BOUTON WHATSAPP               */
-/* ============================= */
-
-.whatsapp-button {
-  background-color: #25D366;
-  color: white;
-  border: none;
-  padding: 6px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.85em;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  transition: background-color 0.3s ease;
-  margin-top: 8px;
-}
-
-.whatsapp-button:hover {
-  background-color: #1ebc5c;
-}
-
-.whatsapp-button img {
-  width: 14px;
-  height: 14px;
-  vertical-align: middle;
-}
-
-/* ============================= */
-/* FOOTER PROFESSIONNEL          */
-/* ============================= */
-
-footer {
-  background-color: #f0f8ff;
-  padding: 30px 20px;
-  text-align: center;
-  font-size: 0.9em;
-  color: #555;
-  border-top: 1px solid #cce6ff;
-  margin-top: 60px;
-}
-
-.footer-content {
-  max-width: 700px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-
-.footer-content p {
-  margin: 6px 0;
-}
-
-.footer-content strong {
-  color: #007ACC;
-}
-
-.footer-content a {
-  color: #007ACC;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.footer-content a:hover {
-  text-decoration: underline;
-}
-
-/* ============================= */
-/* IMPRESSION                    */
-/* ============================= */
-
-@media print {
-  .menu, .hamburger, .whatsapp-button, .navbar {
-    display: none !important;
-  }
-
-  body {
-    background: white !important;
-    color: black !important;
-    font-family: 'Georgia', serif !important;
-  }
-
-  .temoignage-card {
-    border: none !important;
-    box-shadow: none !important;
-    page-break-after: always;
-  }
-
-  footer {
-    font-size: 0.8em;
-    color: #000;
-    background: none;
-    border: none;
-  }
-}
-.form-section {
-  background: linear-gradient(to bottom, #e6f2ff, #ffffff);
   padding: 50px 25px;
   max-width: 800px;
   margin: 60px auto;
   border-radius: 20px;
   box-shadow: 0 12px 24px rgba(0,0,0,0.08);
-  animation: fadeIn 1s ease-in-out forwards;
 }
 
 .intro-box {
@@ -542,9 +353,4 @@ button[type="submit"] {
   display: block;
   margin: 40px auto 0;
   font-weight: bold;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-button[type="submit"]:hover {
-  background-color: #006BB3;
-}
+  box-shadow
