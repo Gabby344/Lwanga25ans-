@@ -30,6 +30,100 @@
             font-style: italic;
             color: #555;
         }
+        /* ==================================== */
+/* 1. STYLES GÉNÉRAUX ET TYPOGRAPHIE */
+/* ==================================== */
+
+/* Applique une police moderne et propre à l'ensemble du corps */
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #333; /* Texte sombre pour la lisibilité */
+    background-color: #f4f7f6; /* Fond très légèrement grisé pour le contraste */
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #1a4f80; /* Couleur institutionnelle (bleu foncé/marine) */
+    padding: 40px 20px 20px;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    border-bottom: 3px solid #e0e0e0; /* Ligne de séparation subtile */
+}
+
+
+/* ==================================== */
+/* 2. MISE EN PAGE DE LA GALERIE (GRID) */
+/* ==================================== */
+
+.gallery-container {
+    /* Utilisation de CSS Grid pour une mise en page moderne et flexible */
+    display: grid;
+    /* Ajuste automatiquement le nombre de colonnes entre 300px et 1 fraction */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+    gap: 30px; /* Augmente l'espace entre les éléments pour une meilleure aération */
+    padding: 20px;
+    max-width: 1400px; /* Élargit légèrement la galerie pour plus de professionnalisme */
+    margin: 0 auto;
+}
+
+/* Gère la mise en page pour les petits écrans (téléphones) */
+@media (max-width: 768px) {
+    .gallery-container {
+        /* Passe à une colonne pour les petits écrans */
+        grid-template-columns: 1fr; 
+        gap: 20px;
+        padding: 15px;
+    }
+    h1 {
+        font-size: 2em;
+    }
+}
+
+/* ==================================== */
+/* 3. STYLES DES ÉLÉMENTS INDIVIDUELS */
+/* ==================================== */
+
+.gallery-item {
+    background-color: #fff; /* Fond blanc pour les items */
+    border: none; /* Supprime la bordure peu élégante */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère pour un effet "flottant" professionnel */
+    border-radius: 8px; /* Bords légèrement arrondis */
+    overflow: hidden; /* Assure que l'image ne dépasse pas les bords arrondis */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Ajout d'une transition pour l'effet survol */
+}
+
+/* Effet au survol : ajoute une légère interactivité */
+.gallery-item:hover {
+    transform: translateY(-5px); /* Monte légèrement l'élément */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Ombre plus prononcée */
+}
+
+.gallery-item img {
+    width: 100%;
+    /* Utilisation d'un 'aspect-ratio' ou d'une 'height' fixe peut être envisagée 
+       pour uniformiser les dimensions, mais 'height: auto' est plus sûr. */
+    height: auto; 
+    display: block;
+    margin-bottom: 0; /* Supprime l'ancienne marge */
+    object-fit: cover; /* Assure que l'image couvre l'espace sans être déformée */
+}
+
+/* Contenu du texte sous l'image */
+.gallery-item p {
+    padding: 15px;
+    margin: 0; /* Retire les marges par défaut des paragraphes */
+    text-align: left; /* Alignement du texte à gauche pour une lecture professionnelle */
+    font-size: 0.95em;
+}
+
+.caption {
+    font-style: normal; /* Retrait de l'italique pour plus de sobriété */
+    color: #555;
+}
+
     </style>
 </head>
 <body>
