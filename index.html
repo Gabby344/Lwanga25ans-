@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Accueil et Soumettre — ISC Lwanga</title>
+  <title>25 ans de lumière — Témoignages ISC Lwanga</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet" />
-
   <link rel="stylesheet" href="assets/css/style.css" />
 
   <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app-compat.js"></script>
@@ -15,67 +14,110 @@
 <body>
 
   <header>
-    <nav class="menu">
+    <div class="navbar">
+      <div class="logo">Institut Saint Charles Lwanga</div>
+      <div class="hamburger" onclick="toggleMenu()">☰</div>
+    </div>
+    <nav class="menu" id="menu">
       <ul>
-        <li><a href="index.html">🏠 Accueil</a></li>
-        <li><a href="livre.html">📖 Livre</a></li>
+        <li><a href="#top">🏠 Accueil</a></li>
+        <li><a href="livre.html">📖 Livre des témoignages</a></li>
         <li><a href="about.html">📜 À propos</a></li>
         <li><a href="contact.html">✉️ Contact</a></li>
       </ul>
     </nav>
   </header>
 
-  <div class="banner-container">
-    <img src="courlwanga.jpg" alt="Photo de l’école" class="banner">
+  <div class="banner-container" id="top">
+    <img src="courlwanga.jpg" alt="Bannière ISC 25 ans" class="banner">
     <div class="banner-text">
-      <h2>🎉 25 Ans de l'ISC Lwanga</h2>
-      <p>Laissez votre marque dans le Livre d'Or de l'école</p>
+      <h2>🎉 25 ans de lumière</h2>
+      <p>Un héritage d’excellence, de foi et de fraternité</p>
     </div>
   </div>
 
   <div class="scrolling-banner">
     <marquee behavior="scroll" direction="left" scrollamount="10">
       <span class="marquee-text">
-        🌟 Joyeux 25 ans Saint Charles Lwanga ! 🥳 Chaque témoignage est un cadeau. Merci de partager votre histoire ! 🌟 Joyeux 25 ans Saint Charles Lwanga ! 🥳
+        🌟 Joyeux 25 ans Saint Charles Lwanga ! 🥳 Merci à tous pour votre soutien ! 🌟 Votre message est précieux. 🥳
       </span>
     </marquee>
   </div>
-  <section class="form-section">
-    <div class="intro-box">
-      <h3>Partagez Votre Témoignage</h3>
-      <p class="description">Ancien élève, enseignant, parent ou membre du personnel : vos souvenirs sont précieux. Remplissez le formulaire ci-dessous pour ajouter votre message au livre.</p>
-      <div id="message-status" class="status-message"></div>
+  <section class="mot-prefet" id="mot-prefet">
+    <h2> Mot du Père Michel Lembe Sds</h2>
+    <p class="subtitle">Préfet de l’Institut Saint Charles Lwanga</p>
+    <div class="mot-container">
+      <img src="peremichel.jpg" alt="Père Michel Lembe" class="mot-photo" />
+      <div class="mot-box">
+        <p>
+          « En cette année jubilaire, nous célébrons 25 ans de lumière, de foi et de fraternité.  
+          L’Institut Saint Charles Lwanga n’est pas seulement un lieu d’apprentissage,  
+          c’est une maison de croissance humaine et spirituelle.  
+          Merci à chaque élève, chaque enseignant, chaque ami de l’école  
+          qui a contribué à bâtir ce patrimoine vivant.  
+          Que cette mémoire nous inspire à aller plus loin, ensemble. »
+        </p>
+        <p class="signature">— Père Michel Lembe Sds</p>
+      </div>
     </div>
-
-    <form id="temoignage-form" class="temoignage-form">
-      <div class="form-group">
-        <label for="nom">Votre Nom ou Pseudo (obligatoire)</label>
-        <input type="text" id="nom" name="nom" required>
-      </div>
-      <div class="form-group">
-        <label for="role">Votre Rôle (ex: Ancien élève, Professeur, Parent)</label>
-        <input type="text" id="role" name="role">
-      </div>
-
-      <div class="form-group">
-        <label for="periode">Période (ex: 2005-2011, 2018)</label>
-        <input type="text" id="periode" name="periode">
-      </div>
-
-      <div class="form-group">
-        <label for="message">Votre Témoignage (obligatoire)</label>
-        <textarea id="message" name="message" rows="6" required></textarea>
-      </div>
-
-      <button type="submit" id="submit-button">Envoyer le témoignage</button>
-    </form>
-    
   </section>
 
-  <footer>© 2025 Institut Saint Charles Lwanga — conçu avec ❤️ par Gabby Umba</footer>
+  <section class="form-section">
+    <div class="intro-box">
+      <h1>📖 Témoignages pour les 25 ans de l’Institut Saint Charles Lwanga</h1>
+      <p class="subtitle">Chaque mot est une lumière. Chaque souvenir est une bénédiction.</p>
+      <p class="description">Partage ton gratitude, ton souvenir ou ton message d’encouragement. Ce livre est le reflet de notre histoire commune.</p>
+    </div>
+
+    <form id="temoignageForm">
+      <div class="form-group">
+        <label for="nom">Veuillez saisir votre nom complet</label>
+        <input type="text" id="nom" placeholder="Ex : Gabby Umba Kyamitala" required />
+      </div>
+
+      <div class="form-group">
+        <label for="role">Choisissez...</label>
+        <select id="role" required>
+          <option value="">Veuillez choisir un rôle</option>
+          <option value="Élève Actuel">🎓 Élève Actuel(le)</option>
+          <option value="Élève Ancien">🎓 Élève Ancien(ne)</option>
+          <option value="Enseignant Actuel">👨‍🏫 Enseignant(e) Actuel(le)</option>
+          <option value="Enseignant Ancien">👨‍🏫 Enseignant(e) Ancien(ne)</option>
+          <option value="Directeur">👨‍🏫 Directeur (Tous)</option>
+          <option value="Préfet">👨‍🏫 Préfet (Tous)</option>
+          <option value="Ami de l’école">🤝 Partenaire, Ami(es) de l’école</option>
+          <option value="autre">👨🏾‍💼 Autre</option>
+        </select>
+      </div>
+
+      <div class="form-group double">
+        <div>
+          <label for="debut">Année de début</label>
+          <select id="debut" required><option value="">Année</option></select>
+        </div>
+        <div>
+          <label for="fin">Année de fin</label>
+          <select id="fin" required><option value="">Année</option></select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="message">💬 Veuillez saisir votre message, souvenir ou bénédiction</label>
+        <textarea id="message" rows="5" placeholder="Ex : Saint Charles m’a forgé, enseigné, et m’a rendu utile à ma société." required></textarea>
+      </div>
+
+      <button type="submit">✨ Appuyez ici pour ajouter votre témoignage</button>
+    </form>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <p>© 2025 Institut Saint Charles Lwanga</p> <strong>Gabby Umba</strong>
+      
+    </div>
+  </footer>
 
   <script>
-    // ... Le code Firebase et le script d'envoi du formulaire restent inchangés ...
     const firebaseConfig = {
       apiKey: "AIzaSyAuHPWVOkd96xPqKQ_K1cC4n4ihuPfuNFQ",
       authDomain: "abiga-1718.firebaseapp.com",
@@ -88,48 +130,64 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    document.getElementById('temoignage-form').addEventListener('submit', async (e) => {
+    const form = document.getElementById('temoignageForm');
+    const debutSelect = document.getElementById('debut');
+    const finSelect = document.getElementById('fin');
+
+    // Fonction pour populer les sélecteurs d'années (de 2000 à 2025)
+    for (let y = 2000; y <= 2025; y++) {
+      debutSelect.innerHTML += `<option value="${y}">${y}</option>`;
+      finSelect.innerHTML += `<option value="${y}">${y}</option>`;
+    }
+
+    // Événement d'envoi du formulaire vers Firebase
+    form.addEventListener('submit', async function(e) {
       e.preventDefault();
-
       const nom = document.getElementById('nom').value.trim();
-      const role = document.getElementById('role').value.trim();
-      const periode = document.getElementById('periode').value.trim();
+      const role = document.getElementById('role').value;
+      const debut = document.getElementById('debut').value;
+      const fin = document.getElementById('fin').value;
       const message = document.getElementById('message').value.trim();
-      const statusElement = document.getElementById('message-status');
-      const submitButton = document.getElementById('submit-button');
 
-      if (!nom || !message) {
-        statusElement.textContent = 'Veuillez remplir votre Nom et votre Message.';
-        statusElement.className = 'status-message error';
+      if (!nom || !role || !debut || !fin || message.length < 5) {
+        alert("Merci de remplir tous les champs avec sincérité.");
         return;
       }
-      
-      submitButton.disabled = true;
-      submitButton.textContent = 'Envoi en cours...';
-      statusElement.textContent = '';
-      statusElement.className = 'status-message';
 
+      // Création du format de période (ex: 2005–2011)
+      const periode = `${debut}–${fin}`;
+
+      // Envoi des données à Firestore
       try {
-        await db.collection("temoignages").add({
-          nom: nom,
-          role: role,
-          periode: periode,
-          message: message,
-          timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        });
+          await db.collection("temoignages").add({
+            nom,
+            role,
+            periode,
+            message,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp() // Utilisation du timestamp du serveur
+          });
 
-        statusElement.textContent = '✅ Merci ! Votre témoignage a été ajouté. Vous pouvez le voir dans le Livre.';
-        statusElement.className = 'status-message success';
-        document.getElementById('temoignage-form').reset();
+          form.reset();
+          alert("✨ Merci pour ton témoignage ! Il a bien été ajouté au livre.");
+          // Redirection vers le livre pour voir le témoignage
+          window.location.href = "livre.html"; 
 
       } catch (error) {
-        console.error("Erreur lors de l'envoi : ", error);
-        statusElement.textContent = "❌ Une erreur est survenue lors de l'envoi. Veuillez réessayer.";
-        statusElement.className = 'status-message error';
-      } finally {
-        submitButton.disabled = false;
-        submitButton.textContent = 'Envoyer le témoignage';
+          console.error("Erreur lors de l'envoi du témoignage :", error);
+          alert("Une erreur s'est produite lors de l'envoi. Veuillez vérifier votre connexion et réessayer.");
       }
+    });
+
+    // Fonctions pour le menu mobile
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      menu.classList.toggle('show');
+    }
+
+    document.querySelectorAll('.menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('menu').classList.remove('show');
+      });
     });
   </script>
 </body>
