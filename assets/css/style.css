@@ -557,3 +557,160 @@ footer {
     display: inline-block;
     padding-right: 50px; /* Espace entre les répétitions du message */
 }
+/* ---------------------------------------------------------------------- */
+/* 2. Style de la Bannière Défilante (Marquee) */
+/* ---------------------------------------------------------------------- */
+.scrolling-banner {
+    /* Utilise l'or comme couleur d'impact et le vert comme couleur de texte */
+    background-color: var(--secondary-color); /* #ffb300 (Or) */
+    color: var(--primary-color); /* #004d40 (Vert foncé) */
+    padding: 12px 0; /* Augmenter le padding pour plus d'espace vertical */
+    font-size: 1.6em;
+    font-weight: 700; /* Plus gras que 600 */
+    white-space: nowrap; 
+    overflow: hidden; 
+    border-top: 5px solid rgba(255, 255, 255, 0.8); /* Bordure blanche plus visible */
+    border-bottom: 5px solid rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 2px; /* Espacement entre les lettres pour un look premium */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre pour la faire ressortir */
+}
+
+.scrolling-banner marquee {
+    margin: 0;
+    padding: 0;
+    line-height: 1.2;
+}
+
+.marquee-text {
+    /* Assurez-vous que le texte dans la marquee a la bonne couleur */
+    color: var(--primary-color);
+    display: inline-block;
+    padding-right: 100px; /* Augmenter l'espace entre les répétitions */
+}
+/* ---------------------------------------------------------------------- */
+/* 3. Style de la Section "Mot du Préfet" */
+/* ---------------------------------------------------------------------- */
+.mot-prefet {
+    background-color: var(--white-bg);
+    padding: 60px 20px;
+    text-align: center;
+    max-width: 1000px;
+    margin: 40px auto;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.mot-prefet h2 {
+    font-size: 2.5em;
+    margin-bottom: 5px;
+}
+
+.mot-prefet .subtitle {
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.mot-container {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    gap: 30px;
+    padding: 20px;
+}
+
+.mot-photo {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%; /* Image ronde */
+    border: 5px solid var(--primary-color);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0; /* Empêche l'image de rétrécir */
+}
+
+.mot-box {
+    background-color: var(--light-bg); /* Fond très clair */
+    padding: 20px;
+    border-left: 5px solid var(--secondary-color); /* Ligne de citation Or */
+    flex-grow: 1;
+}
+
+.mot-box p {
+    font-style: italic;
+    color: var(--text-color);
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.mot-box .signature {
+    font-style: normal;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-align: right;
+    margin-top: 15px;
+}
+
+/* Version mobile du mot du préfet */
+@media (max-width: 768px) {
+    .mot-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .mot-box {
+        border-left: none;
+        border-top: 5px solid var(--secondary-color);
+    }
+    .mot-box .signature {
+        text-align: center;
+    }
+}
+/* ---------------------------------------------------------------------- */
+/* 4. Améliorations du Formulaire sur index.html */
+/* ---------------------------------------------------------------------- */
+
+.form-section {
+    max-width: 800px; /* Taille légèrement réduite pour un meilleur focus */
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.temoignageForm {
+    background-color: var(--white-bg);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid #ddd;
+}
+
+/* Rendre le sélecteur double plus propre */
+.form-group.double {
+    display: flex;
+    gap: 20px;
+}
+
+.form-group.double > div {
+    flex: 1;
+}
+
+/* Bouton d'envoi */
+.form-section button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: var(--secondary-color); /* Utiliser l'Or pour le bouton d'action */
+    color: var(--primary-color);
+    border: none;
+    border-radius: 6px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form-section button[type="submit"]:hover {
+    background-color: #ffc107; /* Or légèrement plus clair */
+}
