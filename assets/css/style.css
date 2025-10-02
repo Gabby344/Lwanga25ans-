@@ -1,7 +1,7 @@
 /*
  * Feuille de style CSS complète
  * Thème : Bleu Ciel (Couleur de l'école)
- * Optimisé et Professionnalisé
+ * Optimisé pour le mobile (gestion du menu hamburger)
  */
 
 /* ============================= */
@@ -31,7 +31,7 @@ section {
   transform: translateY(30px);
   animation: fadeUp 1s ease-out forwards;
   animation-delay: 0.3s;
-  padding: 20px;
+  padding: 20px; /* Ajouté pour un espacement correct autour des sections */
 }
 
 @keyframes fadeUp {
@@ -51,7 +51,7 @@ h1, h2 {
 }
 
 /* ============================= */
-/* MENU DE NAVIGATION - PROFESSIONNEL */
+/* MENU DE NAVIGATION            */
 /* ============================= */
 
 .navbar {
@@ -76,11 +76,12 @@ h1, h2 {
 .hamburger {
   font-size: 1.8em;
   cursor: pointer;
-  color: #007ACC !important;
+  color: #007ACC !important; /* Force la couleur bleue */
   display: none;
 }
 
 .menu {
+  /* Retrait de l'affichage par défaut */
   position: absolute;
   top: 60px;
   left: 0;
@@ -88,17 +89,12 @@ h1, h2 {
   background-color: #E6F2FF;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   z-index: 9999;
-  display: none; /* Caché par défaut en mode mobile */
-}
-
-.menu.show {
-  display: block;
 }
 
 .menu ul {
-  display: flex;
+  display: flex; /* Affichage Desktop par défaut */
   justify-content: center;
-  gap: 30px; /* Épacement optimisé */
+  gap: 40px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -108,32 +104,30 @@ h1, h2 {
   text-decoration: none;
   color: #007ACC;
   font-weight: 600;
-  font-size: 1em;
+  font-size: 1.05em;
   font-family: 'Open Sans', sans-serif;
-  
-  /* Style de bouton épuré */
-  padding: 8px 12px;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-  
+  transition: color 0.3s ease;
   position: relative;
+  padding-bottom: 4px; /* Espace pour la barre de survol */
 }
 
 .menu li a::after {
-  content: none; /* Suppression du soulignement ::after */
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background-color: #007ACC;
+  transition: width 0.3s ease;
 }
 
 .menu li a:hover {
-  color: #fff; /* Texte blanc au survol */
-  background-color: #007ACC; /* Fond bleu au survol */
-  box-shadow: 0 4px 8px rgba(0, 122, 204, 0.3); /* Ombre subtile */
+  color: #006BB3;
 }
 
-.menu.show ul {
-  flex-direction: column;
-  gap: 15px;
-  padding: 20px;
-  text-align: center;
+.menu li a:hover::after {
+  width: 100%;
 }
 
 /* Media Queries pour la gestion du menu mobile */
@@ -141,8 +135,24 @@ h1, h2 {
   .hamburger {
     display: block !important;
   }
+
+  /* Cacher le menu de bureau, préparer le menu déroulant */
+  .menu {
+    display: none;
+  }
   .menu ul {
     display: none;
+  }
+
+  .menu.show {
+    display: block;
+  }
+  .menu.show ul {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    text-align: center;
   }
 }
 
@@ -155,39 +165,6 @@ h1, h2 {
     box-shadow: none;
     background-color: transparent;
   }
-}
-
-/* ============================= */
-/* BOUTON D'ACTION IMPRIMER (NOUVEAU) */
-/* ============================= */
-
-.print-button {
-  display: block;
-  max-width: 300px;
-  margin: 40px auto;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-
-  background-color: #0099FF;
-  color: white;
-  font-weight: bold;
-  font-size: 1.1em;
-  padding: 15px 30px;
-  border-radius: 10px;
-
-  box-shadow: 0 6px 15px rgba(0, 153, 255, 0.4);
-  transition: all 0.3s ease;
-}
-
-.print-button:hover {
-  background-color: #006BB3;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 153, 255, 0.6);
-}
-
-.print-button i {
-    margin-right: 10px;
 }
 
 /* ============================= */
@@ -231,7 +208,7 @@ h1, h2 {
   font-family: 'Playfair Display', serif;
   font-size: 2em;
   margin: 0;
-  color: white;
+  color: white; /* Titre de la bannière en blanc */
 }
 
 .banner-text p {
@@ -391,7 +368,7 @@ button[type="submit"] {
   display: block;
   margin: 40px auto 0;
   font-weight: bold;
-  box-shadow: 0 4px 10px rgba(0, 153, 255, 0.4);
+  box-shadow: 0 4px 10px rgba(0, 153, 255, 0.4); /* Ajouté l'ombre de bouton manquante */
 }
 
 button[type="submit"]:hover {
