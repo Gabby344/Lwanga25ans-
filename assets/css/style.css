@@ -351,3 +351,100 @@ button:hover, button[type="submit"]:hover {
 
 .temoignage strong {
   color: #
+/* ============================= */
+/* BOUTON WHATSAPP               */
+/* ============================= */
+
+.whatsapp-button {
+  background-color: #25D366;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.whatsapp-button:hover {
+  background-color: #1ebc5c;
+}
+
+.whatsapp-button img {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+}
+
+/* ============================= */
+/* FOOTER PROFESSIONNEL          */
+/* ============================= */
+
+footer {
+  background-color: #f0f8ff;
+  padding: 30px 20px;
+  text-align: center;
+  font-size: 0.9em;
+  color: #555;
+  border-top: 1px solid #cce6ff;
+  margin-top: 60px;
+}
+
+.footer-content {
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.footer-content p {
+  margin: 6px 0;
+}
+
+.footer-content strong {
+  color: #007ACC;
+}
+
+.footer-content a {
+  color: #007ACC;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.footer-content a:hover {
+  text-decoration: underline;
+}
+
+/* ============================= */
+/* IMPRESSION                    */
+/* ============================= */
+
+@media print {
+  .menu, .hamburger, .whatsapp-button, .navbar {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+    font-family: 'Georgia', serif !important;
+  }
+
+  .temoignage-card {
+    border: none !important;
+    box-shadow: none !important;
+    page-break-after: always;
+  }
+
+  footer {
+    font-size: 0.8em;
+    color: #000;
+    background: none;
+    border: none;
+  }
+}
