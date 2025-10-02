@@ -533,3 +533,27 @@ footer {
   margin-top: 40px;
   padding: 20px;
 }
+/* Style pour la Bannière Défilante */
+.scrolling-banner {
+    background-color: var(--secondary-color); /* Ambre/Or */
+    color: var(--primary-color); /* Vert foncé */
+    padding: 10px 0;
+    font-size: 1.5em;
+    font-weight: bold;
+    white-space: nowrap; /* Assure que le texte reste sur une seule ligne */
+    overflow: hidden; /* Cache la partie du texte qui n'est pas encore visible */
+    border-top: 3px solid #fff;
+    border-bottom: 3px solid #fff;
+    text-transform: uppercase;
+}
+
+.scrolling-banner marquee {
+    margin: 0;
+    padding: 0;
+    line-height: 1.2;
+}
+
+.marquee-text {
+    display: inline-block;
+    padding-right: 50px; /* Espace entre les répétitions du message */
+}
