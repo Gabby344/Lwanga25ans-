@@ -1,64 +1,113 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <link rel="stylesheet" href="assets/css/style.css" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>À propos — Institut Saint Charles Lwanga</title>
-  <style>
-    body {
-      <nav class="menu">
-  <a href="index.html">Accueil</a>
-  <a href="livre.html">Livre</a>
-  <a href="about.html">À propos</a>
-  <a href="contact.html">Contact</a>
-</nav>
 
-      font-family: 'Georgia', serif;
-      background-color: #fffaf0;
-      color: #333;
-      padding: 40px;
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+  
+  <style>
+    /* Styles spécifiques pour cette page "À propos" */
+    
+    /* Couleurs Bleues Ciel */
+    :root {
+      --blue-light: #e0f7fa; /* Arrière-plan très clair */
+      --blue-primary: #00bcd4; /* Bleu ciel principal */
+      --blue-dark: #00838f; /* Bleu foncé pour le texte important */
+      --text-color: #333;
+    }
+
+    /* Remplacement des styles globaux du <body> pour le bleu ciel */
+    body {
+      background-color: var(--blue-light); 
+      color: var(--text-color);
+      /* Les marges sont gérées par la section container pour laisser le header et footer au bord */
+    }
+
+    .about-container {
+      padding: 40px 20px;
       max-width: 800px;
       margin: auto;
+      background-color: #ffffff; /* Conteneur de contenu en blanc pour la lisibilité */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
     }
 
     h1 {
       text-align: center;
-      color: #d94f70;
+      color: var(--blue-dark); /* Titre en bleu foncé */
       margin-bottom: 20px;
+      font-family: 'Playfair Display', serif;
+    }
+    
+    .logo-container {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .logo-container img {
+        max-width: 150px; /* Taille du logo */
+        height: auto;
+        border-radius: 50%; /* Pour un logo rond, si désiré */
+        border: 4px solid var(--blue-primary);
+        padding: 5px;
+        background-color: white;
     }
 
     p {
       line-height: 1.6;
       margin-bottom: 20px;
+      font-family: 'Open Sans', sans-serif;
     }
 
     .quote {
       font-style: italic;
       text-align: center;
-      color: #555;
+      color: var(--blue-primary);
       margin: 30px 0;
+      padding: 15px;
+      border-left: 5px solid var(--blue-primary);
+      background-color: #f0f8ff; /* Très léger fond bleu */
+      border-radius: 4px;
     }
 
-    footer {
-      text-align: center;
-      font-size: 0.9em;
-      color: #777;
-      margin-top: 40px;
-    }
+    /* Le style du header et du footer est normalement géré par style.css */
+
   </style>
 </head>
 <body>
 
-  <h1>À propos de l’Institut Saint Charles Lwanga</h1>
+  <header>
+    <nav class="menu">
+      <ul>
+        <li><a href="index.html">🏠 Accueil</a></li>
+        <li><a href="livre.html">📖 Livre</a></li>
+        <li><a href="about.html">📜 À propos</a></li>
+        <li><a href="contact.html">✉️ Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <p>Fondé en l’an 2000 à Kolwezi, l’Institut Saint Charles Lwanga est bien plus qu’un établissement scolaire : c’est une maison de lumière, de foi et de rigueur. Depuis 25 ans, il a formé des générations d’élèves, cultivé des vocations, et semé des valeurs durables dans la communauté.</p>
+  <div class="about-container">
+    
+    <div class="logo-container">
+        <img src="logosds.jpg" alt="Logo de l’Institut Saint Charles Lwanga">
+    </div>
 
-  <p>Ce site est un hommage vivant à son histoire, ses enseignants, ses élèves, ses préfets, ses directeurs et tous les amis qui ont contribué à faire de l’Institut un lieu de transformation et d’excellence.</p>
+    <h1>À propos de l’Institut Saint Charles Lwanga</h1>
 
-  <div class="quote">“L’éducation est l’arme la plus puissante pour changer le monde.” — Nelson Mandela</div>
+    <p>Fondé en l’an 2000 à Kolwezi, l’Institut Saint Charles Lwanga est bien plus qu’un établissement scolaire : c’est une maison de lumière, de foi et de rigueur. Depuis 25 ans, il a formé des générations d’élèves, cultivé des vocations, et semé des valeurs durables dans la communauté.</p>
 
-  <p>À travers ce livre de témoignages, nous célébrons les souvenirs, les bénédictions et les liens tissés au fil des années. Que chaque mot soit une lumière pour les générations à venir.</p>
+    <p>Ce site est un hommage vivant à son histoire, ses enseignants, ses élèves, ses préfets, ses directeurs et tous les amis qui ont contribué à faire de l’Institut un lieu de transformation et d’excellence.</p>
+
+    <div class="quote">“L’éducation est l’arme la plus puissante pour changer le monde.” — Nelson Mandela</div>
+
+    <p>À travers ce livre de témoignages, nous célébrons les souvenirs, les bénédictions et les liens tissés au fil des années. Que chaque mot soit une lumière pour les générations à venir.</p>
+
+  </div>
 
   <footer>© 2025 Institut Saint Charles Lwanga — Kolwezi</footer>
 </body>
