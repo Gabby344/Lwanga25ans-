@@ -1,1 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie Photos - Institution Saint Charles</title>
+    <link rel="stylesheet" href="style.css"> 
+    <style>
+        /* CSS DE BASE POUR LA GALERIE (À déplacer dans style.css pour un vrai projet) */
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 3 colonnes sur grand écran */
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .gallery-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .caption {
+            font-style: italic;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Découvrez Saint Charles en Images</h1>
+
+    <div class="gallery-container">
+        
+        <div class="gallery-item">
+            <img src="images/perception.jpg" alt="Vue générale de l'établissement Saint Charles">
+            <p class="caption"> Le père Gabin Sds qui est économe de l'école.</p>
+        </div>
+
+        <div class="gallery-item">
+            <img src="images/grandesalle.jpg" alt="Intérieur de la grande salle de l'institution">
+            <p class="caption">La Grande Salle Bienheux Jordan, lieu de rassemblement pour les événements, conférences et cérémonies.</p>
+        </div>
+
+        <div class="gallery-item">
+            <img src="images/Salledeprof.jpg" alt="Salle de travail des professeurs">
+            <p class="caption">L'espace de travail de nos enseignants : la salle des professeurs.</p>
+        </div>
+
+        <div class="gallery-item">
+            <img src="images/secretaria.jpg" alt="Le secrétariat de l'école">
+            <p class="caption">Le secrétariat, le cœur administratif de l'institution, toujours prêt à vous accueillir.</p>
+        </div>
+
+        <div class="gallery-item">
+            <img src="images/eleves.jpg" alt="Photo d'élèves en activité ou en classe">
+            <p class="caption">Les élèves de 4eme CG en pleine activité, avec le prof Eric Zeng.</p>
+        </div>
+
+        <div class="gallery-item">
+            <img src="images/bibliothequesalleinfo.jpg" alt="La bibliothèque et la salle informatique">
+            <p class="caption">Un espace dédié à l'apprentissage et à la recherche : la bibliothèque et la salle informatique.</p>
+        </div>
+
+        <div class="gallery-item">
+            <img src="images/disciplinedirection.jpg" alt="Les bureaux de la direction et de la discipline">
+            <p class="caption">Les bureaux de la direction et de la discipline, garants du bon fonctionnement de l'école.</p>
+        </div>
+
+        <div class="gallery-item">
+            <img src="images/cantine.jpg" alt="Espace de restauration (cantine)">
+            <p class="caption">La cantine, un lieu de pause convivial pour nos élèves et notre personnel.</p>
+        </div>
+
+    </div>
+    
+    </body>
+</html>
 
