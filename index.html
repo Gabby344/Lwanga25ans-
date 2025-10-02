@@ -144,5 +144,18 @@
       menu.classList.toggle('show');
     }
   </script>
+ <script>
+  function toggleMenu() {
+    const menu = document.getElementById('menu');
+    menu.classList.toggle('show');
+  }
+
+  // Fermer le menu après clic sur un lien
+  document.querySelectorAll('.menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('menu').classList.remove('show');
+    });
+  });
+</script>
 </body>
 </html>
