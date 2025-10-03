@@ -67,8 +67,13 @@
       <button onclick="activerEdition()">🔍 Accéder</button>
     </div>
 
-    <!-- 📲 Récupération du code via WhatsApp -->
+    <!-- 🔁 Lien pour afficher le formulaire -->
     <div class="code-access-box">
+      <p><a href="#" onclick="toggleFormRecup()" style="text-decoration:underline; color:#007f5f;">🔁 Renvoyer mon code</a></p>
+    </div>
+
+    <!-- 📲 Formulaire masqué au départ -->
+    <div class="code-access-box" id="formRecup" style="display:none;">
       <h3>📲 Recevoir ton code secret sur WhatsApp</h3>
       <input type="text" id="recupNom" placeholder="Ton nom complet" />
       <select id="recupRole">
@@ -120,7 +125,7 @@
     }
 
     function afficherTemoignages() {
-      db.collection("temoignages").orderBy("timestamp", "desc").onSnapshot(snapshot => {
+      db.collection("temoignages").orderBy("timestamp", "desc").get().then(snapshot => {
         livre.innerHTML = "";
         snapshot.forEach(doc => {
           const data = doc.data();
@@ -175,8 +180,13 @@
       }
     }
 
+    function toggleFormRecup() {
+      const form = document.getElementById("formRecup");
+      form.style.display = form.style.display === "none" ? "block" : "none";
+    }
+
     function envoyerCodeWhatsApp() {
-      const nom = document.getElementById("recupNom").value.trim();
+            const nom = document.getElementById("recupNom").value.trim();
       const role = document.getElementById("recupRole").value;
       const periode = document.getElementById("recupPeriode").value.trim();
       const numero = document.getElementById("recupNumero").value.trim();
@@ -186,7 +196,7 @@
         return;
       }
 
-            if (!/^(\d{9,15})$/.test(numero)) {
+      if (!/^(\d{9,15})$/.test(numero)) {
         alert("Numéro WhatsApp invalide. Utilise le format international sans + (ex : 243899xxxxxx).");
         return;
       }
@@ -226,6 +236,9 @@
         document.querySelector('.menu').classList.remove('show');
       });
     });
+
+    // Affichage initial des témoignages
+    afficherTemoignages();
   </script>
 </body>
 </html>
