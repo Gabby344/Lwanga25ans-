@@ -798,3 +798,22 @@ form button[type="submit"]:hover {
   50% { box-shadow: 0 0 20px rgba(0,119,204, 0.4); }
   100% { box-shadow: 0 0 10px rgba(0,119,204, 0.2); }
 }
+.code-sent-badge {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #d4f8e8;
+  color: #007f5f;
+  border: 1px solid #00b37a;
+  border-radius: 8px;
+  font-weight: bold;
+  font-family: 'Open Sans', sans-serif;
+  animation: fadeBadge 3s ease forwards;
+  text-align: center;
+}
+
+@keyframes fadeBadge {
+  0% { opacity: 0; transform: scale(0.9); }
+  20% { opacity: 1; transform: scale(1); }
+  80% { opacity: 1; }
+  100% { opacity: 0; transform: scale(0.95); }
+}
