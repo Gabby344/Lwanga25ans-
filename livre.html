@@ -5,13 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Livre des témoignages — ISC Lwanga</title>
 
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet" />
-
-  <!-- Feuille de style -->
   <link rel="stylesheet" href="assets/css/style.css" />
 
-  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore-compat.js"></script>
 </head>
@@ -28,7 +24,6 @@
     </nav>
   </header>
 
-  <!-- Bannière d’entrée -->
   <div class="banner-container">
     <img src="courlwanga.jpg" alt="Photo de l’école" class="banner">
     <div class="banner-text">
@@ -37,14 +32,12 @@
     </div>
   </div>
 
-  <!-- Section des témoignages -->
   <section class="form-section">
     <div class="intro-box">
       <p class="subtitle">Chaque mot est une bénédiction. Chaque souvenir est une pierre vivante.</p>
       <p class="description">Voici les témoignages partagés par la communauté pour célébrer les 25 ans de l’Institut Saint Charles Lwanga.</p>
     </div>
 
-    <!-- 🔐 Zone d’accès par code -->
     <div class="code-access-box">
       <h3>🔐 Modifier ou supprimer ton témoignage</h3>
       <input type="text" id="codeAcces" placeholder="Entre ton code secret ici" />
@@ -95,12 +88,12 @@
               <span class="periode">${data.periode || "Période inconnue"}</span>
             </div>
             <p class="temoignage-message">"${data.message}"</p>
-            <button class="whatsapp-button" onclick="shareWhatsApp('${data.message.replace(/'/g, "\\'")}')">
+            <button class="whatsapp-button" onclick="shareWhatsApp('${encodeURIComponent(data.message)}')">
               <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
               Partager sur WhatsApp
             </button>
             ${codeUtilisateur && data.secretCode === codeUtilisateur ? `
-              <button class="edit-btn" onclick="modifierTemoignage('${doc.id}', '${data.message.replace(/'/g, "\\'")}')">✏️ Modifier</button>
+              <button class="edit-btn" data-id="${doc.id}" data-message="${encodeURIComponent(data.message)}" onclick="modifierTemoignage(this)">✏️ Modifier</button>
               <button class="delete-btn" onclick="supprimerTemoignage('${doc.id}')">🗑️ Supprimer</button>
             ` : ""}
           `;
@@ -110,11 +103,14 @@
     }
 
     function shareWhatsApp(message) {
-      const encoded = encodeURIComponent(`Message pour ISC Lwanga :\n\n${message}`);
+      const encoded = encodeURIComponent(`Message pour ISC Lwanga :\n\n${decodeURIComponent(message)}`);
       window.open(`https://wa.me/?text=${encoded}`, '_blank');
     }
 
-    function modifierTemoignage(id, ancienMessage) {
+    function modifierTemoignage(button) {
+      const id = button.getAttribute("data-id");
+      const ancienMessage = decodeURIComponent(button.getAttribute("data-message"));
+
       const nouveau = prompt("✏️ Modifie ton message :", ancienMessage);
       if (nouveau && nouveau.length > 5) {
         db.collection("temoignages").doc(id).update({
@@ -135,7 +131,6 @@
       }
     }
 
-    // Chargement initial
     afficherTemoignages();
   </script>
 </body>
