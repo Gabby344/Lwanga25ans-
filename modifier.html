@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🔐 Modifier mon témoignage — ISC Lwanga</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore-compat.js"></script>
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <div class="logo">Institut Saint Charles Lwanga</div>
+      <div class="hamburger" onclick="toggleMenu()">☰</div>
+    </div>
+    <nav class="menu" id="menu">
+      <ul>
+        <li><a href="index.html">🏠 Accueil</a></li>
+        <li><a href="livre.html">📖 Livre des témoignages</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="form-section">
+    <div class="intro-box">
+      <h1>🔐 Modifier ou supprimer mon témoignage</h1>
+      <p class="subtitle">Entre ton code secret pour retrouver ton message</p>
+      <input type="text" id="codeInput" placeholder="Ex : x9k3zq1a" />
+      <button onclick="chercherTemoignage()">🔍 Rechercher</button>
+    </div>
+
+    <div id="formContainer" style="display:none;">
+      <form id="editForm">
+        <div class="form-group">
+          <label for="nom">Nom</label>
+          <input type="text" id="nom" required />
+        </div>
+
+        <div class="form-group">
+          <label for="role">Rôle</label>
+          <input type="text" id="role" required />
+        </div>
+
+        <div class="form-group">
+          <label for="periode">Période</label>
+          <input type="text" id="periode" required />
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" rows="5" required></textarea>
+        </div>
+
+        <button type="submit">💾 Mettre à jour</button>
+        <button type="button" onclick="supprimerTemoignage()">🗑️ Supprimer</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <p>© 2025 Institut Saint Charles Lwanga</p> <strong>Gabby Umba</strong>
+    </div>
+  </footer>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAuHPWVOkd96xPqKQ_K1cC4n4ihuPfuNFQ",
+      authDomain: "abiga-1718.firebaseapp.com",
+      projectId: "abiga-1718",
+      storageBucket: "abiga-1718.appspot.com",
+      messagingSenderId: "103455679291",
+      appId: "1:103455679291:web:eda13441fedfce226d4d1e"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    let docId = null;
+
+    async function chercherTemoignage() {
+      const code = document.getElementById("codeInput").value.trim();
+      const snapshot = await db.collection("temoignages").where("secretCode", "==", code).get();
+
+      if (snapshot.empty) {
+        alert("❌ Aucun témoignage trouvé avec ce code.");
+        return;
+      }
+
+      const doc = snapshot.docs[0];
+      const data = doc.data();
+      docId = doc.id;
+
+      document.getElementById("nom").value = data.nom;
+      document.getElementById("role").value = data.role;
+      document.getElementById("periode").value = data.periode;
+      document.getElementById("message").value = data.message;
+      document.getElementById("formContainer").style.display = "block";
+    }
+
+    document.getElementById("editForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      await db.collection("temoignages").doc(docId).update({
+        nom: document.getElementById("nom").value,
+        role: document.getElementById("role").value,
+        periode: document.getElementById("periode").value,
+        message: document.getElementById("message").value,
+        timestamp: Date.now()
+      });
+      alert("✅ Témoignage mis à jour !");
+    });
+
+    async function supprimerTemoignage() {
+      const confirmDelete = confirm("Confirmer la suppression ?");
+      if (confirmDelete && docId) {
+        await db.collection("temoignages").doc(docId).delete();
+        alert("🗑️ Témoignage supprimé.");
+        location.reload();
+      }
+    }
+
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      menu.classList.toggle('show');
+    }
+
+    document.querySelectorAll('.menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('menu').classList.remove('show');
+      });
+    });
+  </script>
+</body>
+</html>
