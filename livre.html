@@ -38,10 +38,31 @@
       <p class="description">Voici les témoignages partagés par la communauté pour célébrer les 25 ans de l’Institut Saint Charles Lwanga.</p>
     </div>
 
+    <!-- 🔐 Zone d’accès par code -->
     <div class="code-access-box">
       <h3>🔐 Modifier ou supprimer ton témoignage</h3>
       <input type="text" id="codeAcces" placeholder="Entre ton code secret ici" />
       <button onclick="activerEdition()">🔍 Accéder</button>
+    </div>
+
+    <!-- 📲 Récupération du code via WhatsApp -->
+    <div class="code-access-box">
+      <h3>📲 Recevoir ton code secret sur WhatsApp</h3>
+      <input type="text" id="recupNom" placeholder="Ton nom complet" />
+      <select id="recupRole">
+        <option value="">Ton rôle</option>
+        <option value="Élève Actuel">Élève Actuel</option>
+        <option value="Élève Ancien">Élève Ancien</option>
+        <option value="Enseignant Actuel">Enseignant Actuel</option>
+        <option value="Enseignant Ancien">Enseignant Ancien</option>
+        <option value="Directeur">Directeur</option>
+        <option value="Préfet">Préfet</option>
+        <option value="Ami de l’école">Ami de l’école</option>
+        <option value="autre">Autre</option>
+      </select>
+      <input type="text" id="recupPeriode" placeholder="Ex : 2015–2020" />
+      <input type="tel" id="recupNumero" placeholder="Ton numéro WhatsApp (ex : 243899xxxxxx)" />
+      <button onclick="envoyerCodeWhatsApp()">📩 Recevoir mon code</button>
     </div>
 
     <div id="livre"></div>
@@ -131,7 +152,52 @@
       }
     }
 
-    afficherTemoignages();
+    function envoyerCodeWhatsApp() {
+      const nom = document.getElementById("recupNom").value.trim();
+      const role = document.getElementById("recupRole").value;
+      const periode = document.getElementById("recupPeriode").value.trim();
+      const numero = document.getElementById("recupNumero").value.trim();
+
+      if (!nom || !role || !periode || !numero) {
+        alert("Merci de remplir tous les champs.");
+        return;
+      }
+
+      if (!/^(\d{9,15})$/.test(numero)) {
+        alert("Numéro WhatsApp invalide. Utilise le format international sans + (ex : 243899xxxxxx).");
+        return;
+      }
+
+      db.collection("temoignages")
+        .where("nom", "==", nom)
+        .where("role", "==", role)
+        .where("periode", "==", periode)
+        .get()
+        .then(snapshot => {
+          if (snapshot.empty) {
+            alert("Aucun témoignage trouvé avec ces informations.");
+          } else {
+            snapshot.forEach(doc => {
+              const data = doc.data();
+              const code = data.secretCode;
+              const message = `🔐 Ton code secret pour modifier ton témoignage est : ${code}\n\nGarde-le précieusement pour accéder à ton message sur le site ISC Lwanga.`;
+              const encoded = encodeURIComponent(message);
+              window.open(`https://wa.me/${numero}?text=${encoded}`, '_blank');
+            });
+          }
+        })
+        .catch(error => {
+          console.error("Erreur lors de la récupération :", error);
+          alert("Une erreur est survenue. Réessaie plus tard.");
+        });
+    }
+
+       document.querySelectorAll('.menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelector('.menu').classList.remove('show');
+      });
+    });
   </script>
 </body>
 </html>
+ 
