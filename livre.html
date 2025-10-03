@@ -8,6 +8,28 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/style.css" />
 
+  <style>
+    .code-sent-badge {
+      margin-top: 10px;
+      padding: 10px 15px;
+      background-color: #d4f8e8;
+      color: #007f5f;
+      border: 1px solid #00b37a;
+      border-radius: 8px;
+      font-weight: bold;
+      font-family: 'Open Sans', sans-serif;
+      animation: fadeBadge 3s ease forwards;
+      text-align: center;
+    }
+
+    @keyframes fadeBadge {
+      0% { opacity: 0; transform: scale(0.9); }
+      20% { opacity: 1; transform: scale(1); }
+      80% { opacity: 1; }
+      100% { opacity: 0; transform: scale(0.95); }
+    }
+  </style>
+
   <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore-compat.js"></script>
 </head>
@@ -63,6 +85,7 @@
       <input type="text" id="recupPeriode" placeholder="Ex : 2015–2020" />
       <input type="tel" id="recupNumero" placeholder="Ton numéro WhatsApp (ex : 243899xxxxxx)" />
       <button onclick="envoyerCodeWhatsApp()">📩 Recevoir mon code</button>
+      <div id="badgeCodeEnvoye" style="display:none;"></div>
     </div>
 
     <div id="livre"></div>
@@ -163,7 +186,7 @@
         return;
       }
 
-      if (!/^(\d{9,15})$/.test(numero)) {
+            if (!/^(\d{9,15})$/.test(numero)) {
         alert("Numéro WhatsApp invalide. Utilise le format international sans + (ex : 243899xxxxxx).");
         return;
       }
@@ -183,6 +206,12 @@
               const message = `🔐 Ton code secret pour modifier ton témoignage est : ${code}\n\nGarde-le précieusement pour accéder à ton message sur le site ISC Lwanga.`;
               const encoded = encodeURIComponent(message);
               window.open(`https://wa.me/${numero}?text=${encoded}`, '_blank');
+
+              document.getElementById("badgeCodeEnvoye").innerHTML = `<div class="code-sent-badge">✅ Code envoyé sur WhatsApp !</div>`;
+              document.getElementById("badgeCodeEnvoye").style.display = "block";
+              setTimeout(() => {
+                document.getElementById("badgeCodeEnvoye").style.display = "none";
+              }, 4000);
             });
           }
         })
@@ -192,7 +221,7 @@
         });
     }
 
-       document.querySelectorAll('.menu a').forEach(link => {
+    document.querySelectorAll('.menu a').forEach(link => {
       link.addEventListener('click', () => {
         document.querySelector('.menu').classList.remove('show');
       });
@@ -200,4 +229,4 @@
   </script>
 </body>
 </html>
- 
+
