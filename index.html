@@ -44,6 +44,7 @@
       </span>
     </marquee>
   </div>
+
   <section class="mot-prefet" id="mot-prefet">
     <h2> Mot du Père Michel Lembe Sds</h2>
     <p class="subtitle">Préfet de l’Institut Saint Charles Lwanga</p>
@@ -114,7 +115,6 @@
   <footer>
     <div class="footer-content">
       <p>© 2025 Institut Saint Charles Lwanga</p> <strong>Gabby Umba</strong>
-      
     </div>
   </footer>
 
@@ -135,13 +135,11 @@
     const debutSelect = document.getElementById('debut');
     const finSelect = document.getElementById('fin');
 
-    // Fonction pour populer les sélecteurs d'années (de 2000 à 2025)
     for (let y = 2000; y <= 2025; y++) {
       debutSelect.innerHTML += `<option value="${y}">${y}</option>`;
       finSelect.innerHTML += `<option value="${y}">${y}</option>`;
     }
 
-    // Événement d'envoi du formulaire vers Firebase
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
       const nom = document.getElementById('nom').value.trim();
@@ -155,37 +153,35 @@
         return;
       }
 
-      // Création du format de période (ex: 2005–2011)
       const periode = `${debut}–${fin}`;
+      const secretCode = Math.random().toString(36).substring(2, 10);
 
-      // Envoi des données à Firestore
       try {
-          await db.collection("temoignages").add({
-            nom,
-            role,
-            periode,
-            message,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp() // Utilisation du timestamp du serveur
-          });
+        await db.collection("temoignages").add({
+          nom,
+          role,
+          periode,
+          message,
+          secretCode,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
 
-          form.reset();
-          alert("✨ Merci pour ton témoignage ! Il a bien été ajouté au livre.");
-          // Redirection vers le livre pour voir le témoignage
-          window.location.href = "livre.html"; 
+        form.reset();
+        alert(`✨ Merci pour ton témoignage !\nTon code de modification est : ${secretCode}\nGarde-le précieusement pour modifier ou supprimer ton message.`);
+        window.location.href = "livre.html";
 
       } catch (error) {
-          console.error("Erreur lors de l'envoi du témoignage :", error);
-          alert("Une erreur s'est produite lors de l'envoi. Veuillez vérifier votre connexion et réessayer.");
+        console.error("Erreur lors de l'envoi du témoignage :", error);
+        alert("Une erreur s'est produite lors de l'envoi. Veuillez vérifier votre connexion et réessayer.");
       }
     });
 
-    // Fonctions pour le menu mobile
     function toggleMenu() {
       const menu = document.getElementById('menu');
       menu.classList.toggle('show');
     }
 
-    document.querySelectorAll('.menu a').forEach(link => {
+        document.querySelectorAll('.menu a').forEach(link => {
       link.addEventListener('click', () => {
         document.getElementById('menu').classList.remove('show');
       });
@@ -193,3 +189,4 @@
   </script>
 </body>
 </html>
+
