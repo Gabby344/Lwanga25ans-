@@ -45,25 +45,6 @@
     </marquee>
   </div>
 
-  <section class="mot-prefet" id="mot-prefet">
-    <h2> Mot du Père Michel Lembe Sds</h2>
-    <p class="subtitle">Préfet de l’Institut Saint Charles Lwanga</p>
-    <div class="mot-container">
-      <img src="peremichel.jpg" alt="Père Michel Lembe" class="mot-photo" />
-      <div class="mot-box">
-        <p>
-          « En cette année jubilaire, nous célébrons 25 ans de lumière, de foi et de fraternité.  
-          L’Institut Saint Charles Lwanga n’est pas seulement un lieu d’apprentissage,  
-          c’est une maison de croissance humaine et spirituelle.  
-          Merci à chaque élève, chaque enseignant, chaque ami de l’école  
-          qui a contribué à bâtir ce patrimoine vivant.  
-          Que cette mémoire nous inspire à aller plus loin, ensemble. »
-        </p>
-        <p class="signature">— Père Michel Lembe Sds</p>
-      </div>
-    </div>
-  </section>
-
   <section class="form-section">
     <div class="intro-box">
       <h1>📖 Témoignages pour les 25 ans de l’Institut Saint Charles Lwanga</h1>
@@ -110,6 +91,12 @@
 
       <button type="submit">✨ Appuyez ici pour ajouter votre témoignage</button>
     </form>
+
+    <!-- ✨ Prévisualisation -->
+    <div id="previewBox" style="display:none;">
+      <h3>✨ Prévisualisation de ton témoignage</h3>
+      <div id="previewCard" class="temoignage-card"></div>
+    </div>
   </section>
 
   <footer>
@@ -140,6 +127,33 @@
       finSelect.innerHTML += `<option value="${y}">${y}</option>`;
     }
 
+    form.addEventListener('input', genererPreview);
+
+    function genererPreview() {
+      const nom = document.getElementById('nom').value.trim();
+      const role = document.getElementById('role').value;
+      const debut = document.getElementById('debut').value;
+      const fin = document.getElementById('fin').value;
+      const message = document.getElementById('message').value.trim();
+
+      if (!nom || !role || !debut || !fin || message.length < 5) {
+        document.getElementById("previewBox").style.display = "none";
+        return;
+      }
+
+      const periode = `${debut}–${fin}`;
+      const previewHTML = `
+        <div class="temoignage-header">
+          <strong>${nom}</strong> — ${role}<br>
+          <span class="periode">${periode}</span>
+        </div>
+        <p class="temoignage-message">"${message}"</p>
+      `;
+
+      document.getElementById("previewCard").innerHTML = previewHTML;
+      document.getElementById("previewBox").style.display = "block";
+    }
+
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
       const nom = document.getElementById('nom').value.trim();
@@ -167,10 +181,11 @@
         });
 
         form.reset();
+        document.getElementById("previewBox").style.display = "none";
         alert(`✨ Merci pour ton témoignage !\nTon code de modification est : ${secretCode}\nGarde-le précieusement pour modifier ou supprimer ton message.`);
         window.location.href = "livre.html";
 
-      } catch (error) {
+            } catch (error) {
         console.error("Erreur lors de l'envoi du témoignage :", error);
         alert("Une erreur s'est produite lors de l'envoi. Veuillez vérifier votre connexion et réessayer.");
       }
@@ -181,7 +196,7 @@
       menu.classList.toggle('show');
     }
 
-        document.querySelectorAll('.menu a').forEach(link => {
+    document.querySelectorAll('.menu a').forEach(link => {
       link.addEventListener('click', () => {
         document.getElementById('menu').classList.remove('show');
       });
