@@ -44,10 +44,17 @@
       <p class="description">Voici les témoignages partagés par la communauté pour célébrer les 25 ans de l’Institut Saint Charles Lwanga.</p>
     </div>
 
+    <!-- 🔐 Zone d’accès par code -->
+    <div class="code-access-box">
+      <h3>🔐 Modifier ou supprimer ton témoignage</h3>
+      <input type="text" id="codeAcces" placeholder="Entre ton code secret ici" />
+      <button onclick="activerEdition()">🔍 Accéder</button>
+    </div>
+
     <div id="livre"></div>
   </section>
 
-  <footer>© 2025 Institut Saint Charles Lwanga —Gabby Umba</footer>
+  <footer>© 2025 Institut Saint Charles Lwanga — Gabby Umba</footer>
 
   <script>
     const firebaseConfig = {
@@ -63,31 +70,73 @@
     const db = firebase.firestore();
     const livre = document.getElementById('livre');
 
-    db.collection("temoignages").orderBy("timestamp", "desc").onSnapshot(snapshot => {
-      livre.innerHTML = "";
-      snapshot.forEach(doc => {
-        const data = doc.data();
-        const div = document.createElement('div');
-        div.className = 'temoignage-card';
-        div.innerHTML = `
-          <div class="temoignage-header">
-            <strong>${data.nom || "Anonyme"}</strong> — ${data.role || "Rôle inconnu"}<br>
-            <span class="periode">${data.periode || "Période inconnue"}</span>
-          </div>
-          <p class="temoignage-message">"${data.message}"</p>
-          <button class="whatsapp-button" onclick="shareWhatsApp('${data.message.replace(/'/g, "\\'")}')">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-            Partager sur WhatsApp
-          </button>
-        `;
-        livre.appendChild(div);
+    let codeUtilisateur = null;
+
+    function activerEdition() {
+      const code = document.getElementById("codeAcces").value.trim();
+      if (code.length < 6) {
+        alert("Code invalide.");
+        return;
+      }
+      codeUtilisateur = code;
+      afficherTemoignages();
+    }
+
+    function afficherTemoignages() {
+      db.collection("temoignages").orderBy("timestamp", "desc").onSnapshot(snapshot => {
+        livre.innerHTML = "";
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          const div = document.createElement('div');
+          div.className = 'temoignage-card';
+          div.innerHTML = `
+            <div class="temoignage-header">
+              <strong>${data.nom || "Anonyme"}</strong> — ${data.role || "Rôle inconnu"}<br>
+              <span class="periode">${data.periode || "Période inconnue"}</span>
+            </div>
+            <p class="temoignage-message">"${data.message}"</p>
+            <button class="whatsapp-button" onclick="shareWhatsApp('${data.message.replace(/'/g, "\\'")}')">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+              Partager sur WhatsApp
+            </button>
+            ${codeUtilisateur && data.secretCode === codeUtilisateur ? `
+              <button class="edit-btn" onclick="modifierTemoignage('${doc.id}', '${data.message.replace(/'/g, "\\'")}')">✏️ Modifier</button>
+              <button class="delete-btn" onclick="supprimerTemoignage('${doc.id}')">🗑️ Supprimer</button>
+            ` : ""}
+          `;
+          livre.appendChild(div);
+        });
       });
-    });
+    }
 
     function shareWhatsApp(message) {
       const encoded = encodeURIComponent(`Message pour ISC Lwanga :\n\n${message}`);
       window.open(`https://wa.me/?text=${encoded}`, '_blank');
     }
+
+    function modifierTemoignage(id, ancienMessage) {
+      const nouveau = prompt("✏️ Modifie ton message :", ancienMessage);
+      if (nouveau && nouveau.length > 5) {
+        db.collection("temoignages").doc(id).update({
+          message: nouveau,
+          timestamp: Date.now()
+        }).then(() => {
+          alert("✅ Témoignage mis à jour !");
+        });
+      }
+    }
+
+    function supprimerTemoignage(id) {
+      const confirmDelete = confirm("🗑️ Supprimer ce témoignage ?");
+      if (confirmDelete) {
+        db.collection("temoignages").doc(id).delete().then(() => {
+          alert("🗑️ Témoignage supprimé.");
+        });
+      }
+    }
+
+    // Chargement initial
+    afficherTemoignages();
   </script>
 </body>
 </html>
