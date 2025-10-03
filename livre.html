@@ -8,28 +8,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/style.css" />
 
-  <style>
-    .code-sent-badge {
-      margin-top: 10px;
-      padding: 10px 15px;
-      background-color: #d4f8e8;
-      color: #007f5f;
-      border: 1px solid #00b37a;
-      border-radius: 8px;
-      font-weight: bold;
-      font-family: 'Open Sans', sans-serif;
-      animation: fadeBadge 3s ease forwards;
-      text-align: center;
-    }
-
-    @keyframes fadeBadge {
-      0% { opacity: 0; transform: scale(0.9); }
-      20% { opacity: 1; transform: scale(1); }
-      80% { opacity: 1; }
-      100% { opacity: 0; transform: scale(0.95); }
-    }
-  </style>
-
   <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore-compat.js"></script>
 </head>
@@ -65,32 +43,6 @@
       <h3>🔐 Modifier ou supprimer ton témoignage</h3>
       <input type="text" id="codeAcces" placeholder="Entre ton code secret ici" />
       <button onclick="activerEdition()">🔍 Accéder</button>
-    </div>
-
-    <!-- 🔁 Lien pour afficher le formulaire -->
-    <div class="code-access-box">
-      <p><a href="#" onclick="toggleFormRecup()" style="text-decoration:underline; color:#007f5f;">🔁 Renvoyer mon code</a></p>
-    </div>
-
-    <!-- 📲 Formulaire masqué au départ -->
-    <div class="code-access-box" id="formRecup" style="display:none;">
-      <h3>📲 Recevoir ton code secret sur WhatsApp</h3>
-      <input type="text" id="recupNom" placeholder="Ton nom complet" />
-      <select id="recupRole">
-        <option value="">Ton rôle</option>
-        <option value="Élève Actuel">Élève Actuel</option>
-        <option value="Élève Ancien">Élève Ancien</option>
-        <option value="Enseignant Actuel">Enseignant Actuel</option>
-        <option value="Enseignant Ancien">Enseignant Ancien</option>
-        <option value="Directeur">Directeur</option>
-        <option value="Préfet">Préfet</option>
-        <option value="Ami de l’école">Ami de l’école</option>
-        <option value="autre">Autre</option>
-      </select>
-      <input type="text" id="recupPeriode" placeholder="Ex : 2015–2020" />
-      <input type="tel" id="recupNumero" placeholder="Ton numéro WhatsApp (ex : 243899xxxxxx)" />
-      <button onclick="envoyerCodeWhatsApp()">📩 Recevoir mon code</button>
-      <div id="badgeCodeEnvoye" style="display:none;"></div>
     </div>
 
     <div id="livre"></div>
@@ -180,66 +132,14 @@
       }
     }
 
-    function toggleFormRecup() {
-      const form = document.getElementById("formRecup");
-      form.style.display = form.style.display === "none" ? "block" : "none";
-    }
-
-    function envoyerCodeWhatsApp() {
-            const nom = document.getElementById("recupNom").value.trim();
-      const role = document.getElementById("recupRole").value;
-      const periode = document.getElementById("recupPeriode").value.trim();
-      const numero = document.getElementById("recupNumero").value.trim();
-
-      if (!nom || !role || !periode || !numero) {
-        alert("Merci de remplir tous les champs.");
-        return;
-      }
-
-      if (!/^(\d{9,15})$/.test(numero)) {
-        alert("Numéro WhatsApp invalide. Utilise le format international sans + (ex : 243899xxxxxx).");
-        return;
-      }
-
-      db.collection("temoignages")
-        .where("nom", "==", nom)
-        .where("role", "==", role)
-        .where("periode", "==", periode)
-        .get()
-        .then(snapshot => {
-          if (snapshot.empty) {
-            alert("Aucun témoignage trouvé avec ces informations.");
-          } else {
-            snapshot.forEach(doc => {
-              const data = doc.data();
-              const code = data.secretCode;
-              const message = `🔐 Ton code secret pour modifier ton témoignage est : ${code}\n\nGarde-le précieusement pour accéder à ton message sur le site ISC Lwanga.`;
-              const encoded = encodeURIComponent(message);
-              window.open(`https://wa.me/${numero}?text=${encoded}`, '_blank');
-
-              document.getElementById("badgeCodeEnvoye").innerHTML = `<div class="code-sent-badge">✅ Code envoyé sur WhatsApp !</div>`;
-              document.getElementById("badgeCodeEnvoye").style.display = "block";
-              setTimeout(() => {
-                document.getElementById("badgeCodeEnvoye").style.display = "none";
-              }, 4000);
-            });
-          }
-        })
-        .catch(error => {
-          console.error("Erreur lors de la récupération :", error);
-          alert("Une erreur est survenue. Réessaie plus tard.");
-        });
-    }
-
     document.querySelectorAll('.menu a').forEach(link => {
       link.addEventListener('click', () => {
         document.querySelector('.menu').classList.remove('show');
       });
     });
 
-    // Affichage initial des témoignages
+    // Affichage initial
     afficherTemoignages();
   </script>
 </body>
 </html>
-
