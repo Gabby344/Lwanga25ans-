@@ -8,14 +8,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet" />
   
   <style>
-    /* --- Styles pour l'animation d'ouverture (Livre d'Or) --- */
+    /* --- Styles pour l'animation d'ouverture (Livre d'Or Électronique) --- */
     #splash-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: #0a192f; /* Bleu nuit profond */
+      background: #050b1a; /* Fond encore plus profond */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -24,111 +24,157 @@
     }
 
     .book-cover {
-      width: 320px;
-      height: 450px;
-      background: linear-gradient(135deg, #1a3a6c 0%, #0a192f 100%);
-      border: 4px solid #d4af37; /* Bordure Or */
-      border-radius: 10px 20px 20px 10px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      width: 340px;
+      height: 480px;
+      background: linear-gradient(135deg, #0d2347 0%, #050b1a 100%);
+      border: 3px solid #d4af37; /* Bordure Or */
+      border-radius: 5px 25px 25px 5px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 0 20px rgba(212, 175, 55, 0.2);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 20px;
+      padding: 30px;
       cursor: pointer;
       position: relative;
-      transform: perspective(1000px) rotateY(0deg);
-      transition: transform 1.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+      transform: perspective(1500px) rotateY(0deg);
+      transition: transform 1.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+      overflow: hidden;
+    }
+
+    /* Effet brillant sur la couverture */
+    .book-cover::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
+      transform: rotate(45deg);
+      pointer-events: none;
     }
 
     .book-cover.open {
-      transform: perspective(1000px) rotateY(-110deg);
+      transform: perspective(1500px) rotateY(-120deg);
       opacity: 0;
+      pointer-events: none;
     }
 
-    .book-logo {
-      width: 100px;
-      height: 100px;
+    .book-logo-container {
+      width: 120px;
+      height: 120px;
       background: white;
       border-radius: 50%;
-      margin-bottom: 20px;
-      border: 3px solid #d4af37;
+      margin-bottom: 25px;
+      border: 4px solid #d4af37;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-weight: bold;
-      color: #1a3a6c;
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+      overflow: hidden; /* Pour que le logo reste rond */
+    }
+
+    .book-logo-container img {
+      width: 85%;
+      height: 85%;
+      object-fit: contain;
     }
 
     .book-title {
       font-family: 'Playfair Display', serif;
       color: #d4af37;
-      font-size: 24px;
-      margin-bottom: 10px;
+      font-size: 28px;
+      margin-bottom: 15px;
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
+    .book-separator {
+      width: 60px;
+      height: 2px;
+      background: #d4af37;
+      margin: 15px 0;
     }
 
     .book-subtitle {
       color: #ffffff;
-      font-size: 14px;
+      font-size: 16px;
       font-family: 'Open Sans', sans-serif;
-      border-top: 1px solid #d4af37;
-      padding-top: 10px;
+      margin-top: 5px;
+      font-weight: 300;
+    }
+
+    .book-location {
+      color: #d4af37;
+      font-size: 12px;
+      margin-top: 40px;
+      letter-spacing: 1px;
     }
 
     .click-hint {
       position: absolute;
-      bottom: 20px;
-      color: #d4af37;
-      font-size: 12px;
-      animation: blink 2s infinite;
+      bottom: 25px;
+      color: rgba(255,255,255,0.6);
+      font-size: 11px;
+      text-transform: uppercase;
+      animation: blink 2.5s infinite;
     }
 
-    @keyframes blink { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+    @keyframes blink { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
 
-    /* --- Vos styles existants (simplifiés pour l'exemple) --- */
-    body { font-family: 'Open Sans', sans-serif; margin: 0; padding: 0; background: #f4f4f4; }
-    header { background: #1a3a6c; color: white; padding: 1rem; position: sticky; top: 0; z-index: 100; }
-    .navbar { display: flex; justify-content: space-between; align-items: center; }
+    /* Styles pour le reste du site (selon votre structure) */
+    body { font-family: 'Open Sans', sans-serif; margin: 0; padding: 0; background: #fdfdfd; }
+    header { background: #0d2347; color: white; padding: 1rem; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+    .navbar { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: auto; }
+    .logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; }
     .menu { display: none; }
-    .menu.show { display: block; }
-    .banner-container { position: relative; text-align: center; color: white; }
-    .banner { width: 100%; height: 300px; object-fit: cover; }
-    .banner-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.5); padding: 20px; border-radius: 10px; }
-    .form-section { max-width: 800px; margin: 20px auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-    .form-group { margin-bottom: 15px; display: flex; flex-direction: column; }
-    input, select, textarea { padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
-    button { background: #d4af37; color: #0a192f; padding: 15px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
-    .mot-prefet { background: #fff; padding: 40px 20px; text-align: center; }
-    .mot-photo { width: 150px; border-radius: 50%; border: 3px solid #d4af37; }
+    .menu.show { display: block; background: #0d2347; position: absolute; top: 100%; left: 0; width: 100%; text-align: center; }
+    .menu ul { list-style: none; padding: 0; }
+    .menu li { padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .menu a { color: white; text-decoration: none; }
+    .banner-container { position: relative; width: 100%; height: 400px; overflow: hidden; }
+    .banner { width: 100%; height: 100%; object-fit: cover; }
+    .banner-text { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); background: rgba(13, 35, 71, 0.85); color: white; padding: 25px; border-radius: 5px; text-align: center; border-left: 5px solid #d4af37; }
+    .form-section { max-width: 700px; margin: 50px auto; padding: 40px; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #eee; }
+    .form-group { margin-bottom: 20px; }
+    label { display: block; margin-bottom: 8px; font-weight: 600; color: #333; }
+    input, select, textarea { width: 100%; padding: 12px; border: 1.5px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+    button { width: 100%; background: #d4af37; color: #050b1a; padding: 18px; border: none; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; transition: 0.3s; }
+    button:hover { background: #b8962d; transform: translateY(-2px); }
   </style>
 </head>
 <body>
 
   <div id="splash-overlay">
     <div class="book-cover" id="bookCover" onclick="openBook()">
-      <div class="book-logo">ISC</div>
+      <div class="book-logo-container">
+        <img src="logosds.jpg" alt="Logo SDS">
+      </div>
       <h1 class="book-title">Livre d’Or</h1>
-      <p class="book-subtitle">25ème Anniversaire<br>2000 - 2025</p>
-      <div style="color: white; margin-top: 20px; font-size: 0.8rem;">Institut Saint Charles Lwanga<br>Kolwezi</div>
-      <div class="click-hint">Cliquez pour ouvrir le livre</div>
+      <div class="book-separator"></div>
+      <p class="book-subtitle">Jubilé d'Argent<br><strong>25 ans de Lumière</strong></p>
+      <p style="color: white; font-size: 0.9rem; margin-top: 10px;">2000 - 2025</p>
+      
+      <p class="book-location">Institut Saint Charles Lwanga<br>Kolwezi</p>
+      
+      <div class="click-hint">Touchez pour ouvrir le livre</div>
     </div>
   </div>
 
   <header>
     <div class="navbar">
       <div class="logo">Institut Saint Charles Lwanga</div>
-      <div class="hamburger" onclick="toggleMenu()">☰</div>
+      <div class="hamburger" style="cursor:pointer; font-size: 1.5rem;" onclick="toggleMenu()">☰</div>
     </div>
     <nav class="menu" id="menu">
       <ul>
         <li><a href="#top">🏠 Accueil</a></li>
         <li><a href="livre.html">📖 Livre des témoignages</a></li>
-        <li><a href="about.html">📜 À propos</a></li>
-        <li><a href="contact.html">✉️ Contact</a></li>
         <li><a href="galerie.html">📸 Galerie Photo</a></li>
+        <li><a href="about.html">📜 À propos</a></li>
       </ul>
     </nav>
   </header>
@@ -136,22 +182,14 @@
   <div class="banner-container" id="top">
     <img src="courlwanga.jpg" alt="Bannière ISC 25 ans" class="banner">
     <div class="banner-text">
-      <h2>🎉 25 ans de lumière</h2>
-      <p>Un héritage d’excellence, de foi et de fraternité</p>
+      <h2 style="margin:0; font-family: 'Playfair Display', serif;">🎉 25 ans de lumière</h2>
+      <p style="margin:5px 0 0 0;">Un héritage d’excellence, de foi et de fraternité</p>
     </div>
   </div>
 
-  <section class="mot-prefet">
-    <h2>Mot du Père Michel Lembe Sds</h2>
-    <img src="peremichel.jpg" alt="Père Michel Lembe" class="mot-photo" />
-    <p>« En cette année jubilaire, nous célébrons 25 ans de lumière... »</p>
-  </section>
-
   <section class="form-section">
-    <div class="intro-box">
-      <h1>📖 Témoignages</h1>
-      <p>Partagez votre message pour le jubilé.</p>
-    </div>
+    <h2 style="text-align:center; font-family: 'Playfair Display', serif;">📖 Laissez votre empreinte</h2>
+    <p style="text-align:center; color: #666; margin-bottom: 30px;">Votre témoignage sera conservé précieusement dans les archives numériques de l'école.</p>
 
     <form id="temoignageForm">
       <div class="form-group">
@@ -160,70 +198,47 @@
       </div>
 
       <div class="form-group">
-        <label for="role">Votre rôle</label>
+        <label for="role">Votre relation avec l'école</label>
         <select id="role" required>
-          <option value="">Choisir...</option>
-          <option value="Élève Ancien">🎓 Élève Ancien(ne)</option>
-          <option value="Élève Actuel">🎓 Élève Actuel(le)</option>
-          <option value="Enseignant">👨‍🏫 Enseignant(e)</option>
-          <option value="Ami">🤝 Ami de l'école</option>
+          <option value="">Choisir un profil...</option>
+          <option value="Ancien Élève">🎓 Ancien(ne) Élève</option>
+          <option value="Élève Actuel">📖 Élève Actuel(le)</option>
+          <option value="Enseignant">👨‍🏫 Corps Enseignant</option>
+          <option value="Ami">🤝 Ami / Partenaire</option>
         </select>
       </div>
 
       <div class="form-group">
-        <label for="message">Votre message</label>
-        <textarea id="message" rows="5" required></textarea>
+        <label for="message">Votre message ou souvenir</label>
+        <textarea id="message" rows="6" placeholder="Partagez un souvenir marquant ou un vœu pour le futur..." required></textarea>
       </div>
 
-      <button type="submit">✨ Ajouter mon témoignage au Livre d'Or</button>
+      <button type="submit">✍️ Enregistrer dans le Livre d'Or</button>
     </form>
   </section>
 
   <script>
-    // Animation d'ouverture du livre
+    // Script d'ouverture du livre
     function openBook() {
       const cover = document.getElementById('bookCover');
       const overlay = document.getElementById('splash-overlay');
       
       cover.classList.add('open');
       
+      // On attend la fin de l'animation de rotation pour cacher l'overlay
       setTimeout(() => {
         overlay.style.opacity = '0';
         setTimeout(() => {
           overlay.style.visibility = 'hidden';
         }, 1000);
-      }, 500);
+      }, 800);
     }
-
-    // Auto-ouverture après 4 secondes si l'utilisateur ne clique pas
-    setTimeout(() => {
-        const overlay = document.getElementById('splash-overlay');
-        if(overlay.style.visibility !== 'hidden') openBook();
-    }, 4000);
-
-    // Configuration Firebase (Gardez vos identifiants réels ici)
-    const firebaseConfig = {
-      apiKey: "AIzaSyAuHPWVOkd96xPqKQ_K1cC4n4ihuPfuNFQ",
-      authDomain: "abiga-1718.firebaseapp.com",
-      projectId: "abiga-1718",
-      storageBucket: "abiga-1718.appspot.com",
-      messagingSenderId: "103455679291",
-      appId: "1:103455679291:web:eda13441fedfce226d4d1e"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-
-    // Gestion du formulaire
-    document.getElementById('temoignageForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      // ... Votre logique d'envoi Firebase existante ...
-      alert("Témoignage envoyé avec succès !");
-    });
 
     function toggleMenu() {
       document.getElementById('menu').classList.toggle('show');
     }
+
+    // Note : Pensez à ré-inclure votre script Firebase ici pour l'envoi des données
   </script>
 </body>
 </html>
